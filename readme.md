@@ -8,6 +8,7 @@ A set of common [stache converters](http://canjs.github.io/canjs/doc/can-stache.
   - <code>[string-to-any(~item)](#string-to-anyitem)</code>
   - <code>[not(~value)](#notvalue)</code>
   - <code>[index-to-selected(~item, list)](#index-to-selecteditem-list)</code>
+  - <code>[either-or(~chosen, a, b)](#either-orchosen-a-b)</code>
 
 ## API
 
@@ -103,6 +104,34 @@ When the setter is called, takes the selected index value and finds the item fro
 
 - __returns__ <code>{can-compute}</code>:
   A compute that will be two-way bound to the select's value.
+  
+
+### <code>either-or(~chosen, a, b)</code>
+
+
+When the getter is called, gets the value of the **chosen** compute and if it is equal to **a** returns true, otherwise it returns false.
+
+When the setter is called, if the new value is truthy, sets the **chosen** [can-compute] to **a**'s value, otherwise sets it to **b**'s value.
+
+```handlebars
+<span>Favorite superhero:</span>
+<input type="checkbox" {($checked)}="either-or(~chosen, 'Batman', 'Superman')"> Batman?
+```
+
+
+1. __chosen__ <code>{can-compute}</code>:
+  A compute where the chosen value (between `a` and `b` is stored). When the setter is called, this compute's value will be updated.
+  
+1. __a__ <code>{*}</code>:
+  The `true` value. If the checkbox is checked, then **a**'s value will be stored in the **chosen** compute.
+  
+1. __b__ <code>{*}</code>:
+  The `false` value. If the checkbox is unchecked, then **b**'s value will be stored in the **chosen** compute.
+  
+
+- __returns__ <code>{can-compute}</code>:
+  A compute that will be used by [can-stache-bindings] as a getter/setter bound to the element.
+
   
 ## Contributing
 
