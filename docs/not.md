@@ -1,5 +1,5 @@
 @function can-stache-converters.not not
-@parent can-stache-converters
+@parent can-stache-converters.converters
 @description A [can-stache.registerConverter converter] that two-way binds the negation of a value.
 
 @signature `not(~value)`

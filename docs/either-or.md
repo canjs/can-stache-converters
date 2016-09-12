@@ -1,5 +1,5 @@
 @function can-stache-converters.either-or either-or
-@parent can-stache-converters
+@parent can-stache-converters.converters
 @description a [can-stache-registerConverter converter] that two-way binds to a checkbox two values provided as arguments. This converter is useful when you have a binary decision that your user will implicitly understand.
 
 @signature `either-or(~chosen, a, b)`

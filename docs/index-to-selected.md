@@ -1,5 +1,5 @@
 @function can-stache-converters.index-to-selected index-to-selected
-@parent can-stache-converters
+@parent can-stache-converters.converters
 @description A [can-stache.registerConverter converter] that binds to a `<select>` value in order to two-way bind a selected item from a list using the index as the key.
 
 @signature `index-to-selected(~item, list)`
