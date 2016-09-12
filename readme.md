@@ -2,57 +2,108 @@
 
 [![Build Status](https://travis-ci.org/canjs/can-stache-converters.png?branch=master)](https://travis-ci.org/canjs/can-stache-converters)
 
-Common converters for Stache
+A set of common [stache converters](http://canjs.github.io/canjs/doc/can-stache.registerConverter.html) to use with forms in your application.
 
-## Usage
+  - <code>[boolean-to-inList(item, list)](#boolean-to-inlistitem-list)</code>
+  - <code>[string-to-any(~item)](#string-to-anyitem)</code>
+  - <code>[not(~value)](#notvalue)</code>
+  - <code>[index-to-selected(~item, list)](#index-to-selecteditem-list)</code>
 
-### ES6 use
+## API
 
-With StealJS, you can import this module directly in a template that is autorendered:
 
-```js
-import plugin from 'can-stache-converters';
+### <code>boolean-to-inList(item, list)</code>
+
+
+When the getter is called, returns true if **item** is within the **list**, determined using `.indexOf`.
+
+When the setter is called, if the new value is truthy then the item will be added to the list using `.push`; if it is falsey the item will removed from the list using `.splice`.
+
+```handlebars
+<input type="checkbox" {($value)}="boolean-to-inList(item, list)" />
 ```
 
-### CommonJS use
 
-Use `require` to load `can-stache-converters` and everything else
-needed to create a template that uses `can-stache-converters`:
+1. __item__ <code>{*}</code>:
+  The item to which to check
+1. __list__ <code>{can-define/list/list|can-list|Array}</code>:
+  The list
 
-```js
-var plugin = require("can-stache-converters");
+- __returns__ <code>{can-compute}</code>:
+  A compute that will be used by [can-stache-bindings] as a getter/setter when the element's value changes.
+  
+
+### <code>string-to-any(~item)</code>
+
+
+When the getter is called, gets the value of the compute and calls `.toString()` on that value.
+
+When the setter is called, takes the new value and converts it to the primitive value using [can-util/js/string-to-any/string-to-any] and sets the compute using that converted value.
+
+```handlebars
+<select {($value)}="string-to-any(~favePlayer)">
+  <option value="23">Michael Jordan</option>
+	<option value="32">Magic Johnson</option>
+</select>
 ```
 
-## AMD use
 
-Configure the `can` and `jquery` paths and the `can-stache-converters` package:
+1. __item__ <code>{can-compute}</code>:
+  A compute holding a primitive value.
 
-```html
-<script src="require.js"></script>
-<script>
-	require.config({
-	    paths: {
-	        "jquery": "node_modules/jquery/dist/jquery",
-	        "can": "node_modules/canjs/dist/amd/can"
-	    },
-	    packages: [{
-		    	name: 'can-stache-converters',
-		    	location: 'node_modules/can-stache-converters/dist/amd',
-		    	main: 'lib/can-stache-converters'
-	    }]
-	});
-	require(["main-amd"], function(){});
-</script>
+- __returns__ <code>{can-compute}</code>:
+  A compute that will be used by [can-stache-bindings] as a getter/setter when the element's value changes.
+  
+
+### <code>not(~value)</code>
+
+
+When the getter is called, gets the value of the compute and returns the negation.
+
+When the setter is called, sets the compute's value to the negation of the new value derived from the element.
+
+*Note* that `not` needs a compute so that it can update the scope's value when the setter is called.
+
+```handlebars
+<input type="checkbox" {($checked)}="not(~val)" />
 ```
 
-### Standalone use
 
-Load the `global` version of the plugin:
+1. __value__ <code>{can-compute}</code>:
+  A value stored in a [can-compute].
 
-```html
-<script src='./node_modules/can-stache-converters/dist/global/can-stache-converters.js'></script>
+- __returns__ <code>{can-compute}</code>:
+  A compute that will be two-way bound by [can-stache-bindings] as a getter/setter on the element.
+  
+
+### <code>index-to-selected(~item, list)</code>
+
+
+When the getter is called, returns the index of the passed in item (which should be a [can-compute] from the provided list.
+
+When the setter is called, takes the selected index value and finds the item from the list with that index and passes that to set the compute's value.
+
+```handlebars
+<select {($value)}="index-to-selected(~person, people)">
+
+	{{#each people}}
+
+		<option value="{{%index}}">{{name}}</option>
+
+	{{/each}}
+
+</select>
 ```
 
+
+1. __item__ <code>{can-compute}</code>:
+  A compute whose item is in the list.
+1. __list__ <code>{can-define/list/list|can-list|Array}</code>:
+  A list used to find the `item`.
+
+- __returns__ <code>{can-compute}</code>:
+  A compute that will be two-way bound to the select's value.
+  
 ## Contributing
 
 ### Making a Build
