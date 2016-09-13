@@ -67,3 +67,18 @@ stache.registerConverter("either-or", {
 		chosen(newVal ? a : b);
 	}
 });
+
+stache.registerConverter("equal", {
+	get: function(compute, comparer){
+		if(!compute || !compute.isComputed) {
+			throw new Error("'equal' must be given a can-compute as the first argument");
+		}
+
+		return compute() === comparer;
+	},
+	set: function(b, compute, comparer){
+		if(b) {
+			compute(comparer);
+		}
+	}
+});
