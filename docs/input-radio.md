@@ -1,20 +1,33 @@
-@function can-stache-bindings.can-value-radio input type=radio
-@parent can-stache-bindings.can-value
+@page can-stache-converters.pages.input-radio input[type=radio]
+@parent can-stache-converters.pages
 
 Cross bind a value to a radio input.
 
-@signature `<input type='radio' can-value='KEY' value='VALUE'/>`
-
-If the radio element is checked, sets the observable specified by `can-value` to match the value of 
-`value` attribute.  
-
-@param {can-stache.key} KEY A named value in the current scope. It should reference a
-a [can-map] property or a [can-compute.computed].
-
-@param {String} VALUE Used to set the value of `KEY` when the radio input is checked.
-
 @body
 
-## Use
+## Binding to radios
 
-@demo can/view/bindings/doc/input-radio.html
+To bind to a radio input, if you have a set of boolean values you can bind to the input's `checked` property as you do with [can-stache-converters.pages.input-checkbox].
+
+```handlebars
+<input type="radio" {($checked)}="one" /> One
+<input type="radio" {($checked)}="two" /> Two
+```
+
+```js
+var template = stache.from("demo");
+var map = new DefineMap({
+	one: true,
+	two: false
+});
+
+document.body.appendChild(template(map));
+```
+
+## Binding to a selected value
+
+More often than binding to boolean values of each radio's `checked` value, you will want to know what the `value` is of the radio group. Since each radio has it's own `value`, the radio's selected value is the value of the radio item that is selected.
+
+Using the [can-stache.registerConverter converter] [can-stache-converters.equal] you can bind a value within your scope to the radio group's selected value:
+
+@demo demos/can-stache-converters/input-radio.html
