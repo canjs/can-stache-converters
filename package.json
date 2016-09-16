@@ -41,7 +41,7 @@
   "dependencies": {
     "can-stache": "^3.0.0-pre.20",
     "can-stache-bindings": "^3.0.0-pre.20",
-    "can-util": "^3.0.0-pre.36"
+    "can-util": "^3.0.0-pre.48"
   },
   "devDependencies": {
     "bit-docs": "0.0.7",
