@@ -34,14 +34,19 @@ QUnit.test("Basics works", function(){
 	QUnit.equal(no.checked, false, "no is unchecked");
 });
 
-QUnit.test("Throws when not passed a compute as the first argument", function(){
-	var template = stache('<input type="radio" {($checked)}="equal(attending, \'yes\'" />');
-	var attending = compute("yes");
+QUnit.test("Allows one-way binding when passed a non-compute as the first argument", function(){
+	var template = stache('<input type="radio" {($checked)}="equal(attending, true)" />');
+	var attending = compute(false);
 
-	try {
-		template(attending);
-	} catch(err) {
-		var msg = err.message;
-		QUnit.ok(/can-compute/.test(msg), "got an error about a can-compute being needed");
-	}
+	var input = template({ attending: attending }).firstChild;
+
+	QUnit.equal(input.checked, false, 'initially false');
+
+	attending(true);
+
+	QUnit.equal(input.checked, true, 'can be changed to true');
+
+	input.checked = false;
+
+	QUnit.equal(attending(), true, 'does not change compute');
 });
