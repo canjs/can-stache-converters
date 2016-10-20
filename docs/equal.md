@@ -20,11 +20,26 @@ In this example, the `color` scope value will be set to 'red' when the first rad
 
 @return {can-compute} A compute that will be two-way bound to the radio's checked property.
 
+@signature `equal(valueOne, valueTwo)`
+
+When the getter is called the two values will be compared and if they are equal, returns true.
+
+```handlebars
+<my-modal {show}="equal(showModal, true)" />
+```
+
+In this example, the `show` value of `my-modal`'s view model will be set to `true` when `showModal` in the scope is set to true.
+
+@param {*} valueOne A value of any type, that will be compared to valueTwo.
+@param {*} valueTwo A value of any type, that will be compared to valueOne.
+
+@return {can-compute} A compute that will be one-way bound to the `show` property.
+
 @body 
 
 ## Use
 
-This [can-stache.converter converter] will most often be used in conjunction with a radio input in order to bind a scope's value (such as string, but could be any value) based on the selection of the radio group.
+This [can-stache-converters converter] will most often be used in conjunction with a radio input in order to bind a scope's value (such as string, but could be any value) based on the selection of the radio group.
 
 In this example we are using objects, to select a captain from one of three players:
 
