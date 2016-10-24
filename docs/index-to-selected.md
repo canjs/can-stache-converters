@@ -34,4 +34,4 @@ The provided `item` **must** be a [can-compute] so that its value can be set whe
 
 You **must** use the indexes from the list as your `<option>` values. This is how it looks up items in the list both in the getter and the setter.
 
-@demo demos/can-stache-converters/select-by-index.html
+@demo demos/can-stache-converters/index-to-selected.html
