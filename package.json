@@ -45,9 +45,9 @@
   },
   "devDependencies": {
     "bit-docs": "0.0.7",
-    "can-compute": "^3.0.0-pre.12",
+    "can-compute": "^3.0.0",
     "can-define": "^0.7.29",
-    "can-event": "^3.0.0-pre.10",
+    "can-event": "^3.0.1",
     "documentjs": "^0.4.2",
     "done-serve": "^0.3.0-pre.0",
     "donejs-cli": "^0.10.0-pre.0",
