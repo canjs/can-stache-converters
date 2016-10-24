@@ -13,7 +13,7 @@ To bind to a checkbox and set a boolean value within your [can-view-scope scope]
 <input type="checkbox" {($checked)}="val" />
 ```
 
-[can-stache-converters provides a couple of convenience converters that handle common use cases for binding to a checkbox.
+[can-stache-converters] provides a couple of convenient converters that handle common use cases for binding to a checkbox.
 
 ## Binding based on whether an item is in a list
 
