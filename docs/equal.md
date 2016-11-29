@@ -1,6 +1,6 @@
 @function can-stache-converters.equal equal
 @parent can-stache-converters.converters
-@description A [can-stache.registerConverter converter] that is usually for binding to a `<input type="radio">` group, so that a scope value can be set the radio group's selected value.
+@description A [can-stache.registerConverter converter] that is usually for binding to a `<input type="radio">` group, so that a scope value can be set the radio group’s selected value.
 
 @signature `equal(~compute, value)`
 
@@ -39,7 +39,7 @@ In this example, the `show` value of `my-modal`'s view model will be set to `tru
 
 ## Use
 
-This [can-stache-converters converter] will most often be used in conjunction with a radio input in order to bind a scope's value (such as string, but could be any value) based on the selection of the radio group.
+This [can-stache-converters converter] will most often be used in conjunction with a radio input in order to bind a scope’s value (such as string, but could be any value) based on the selection of the radio group.
 
 In this example we are using objects, to select a captain from one of three players:
 

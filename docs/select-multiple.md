@@ -8,8 +8,8 @@ Cross bind a value to a `<select>` element with multiple selections permitted.
 Cross binds the selected option values with an observable value.
 
 @param {can.stache.key} KEY A named value in the current 
-scope. `KEY`'s value is cross bound with the selected `<option>` in
-the `<select>`. `KEY`'s value should be an Array-like,
+scope. `KEY`’s value is cross bound with the selected `<option>` in
+the `<select>`. `KEY`’s value should be an Array-like,
 or `undefined`.
 
 @body
@@ -17,8 +17,8 @@ or `undefined`.
 ## Use
 
 Select elements with the multiple attribute (`<select multiple {($values)}="KEY"/>`)
-have a specified behavior if the value of KEY is Array like, or 
-undefined.
+have a specified behavior if the value of KEY is Array-like or
+`undefined`.
 
 ## Cross binding to Arrays
 

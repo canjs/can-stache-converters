@@ -1,6 +1,6 @@
 @function can-stache-converters.string-to-any string-to-any
 @parent can-stache-converters.converters
-@description A [can-stache.registerConverter converter] that binds a value to a primitive value, two way converted back to that primitive value when the attribute changes.
+@description A [can-stache.registerConverter converter] that binds a value to a primitive value, two-way converted back to that primitive value when the attribute changes.
 
 @signature `string-to-any(~item)`
 
@@ -16,7 +16,7 @@ When the setter is called, takes the new value and converts it to the primitive 
 ```
 
 @param {can-compute} item A compute holding a primitive value.
-@return {can-compute} A compute that will be used by [can-stache-bindings] as a getter/setter when the element's value changes.
+@return {can-compute} A compute that will be used by [can-stache-bindings] as a getter/setter when the element’s value changes.
 
 @body
 
