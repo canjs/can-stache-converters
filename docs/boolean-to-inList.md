@@ -1,6 +1,6 @@
 @function can-stache-converters.boolean-to-inList boolean-to-inList
 @parent can-stache-converters.converters
-@description A [can-stache.registerConverter converter] that binds a boolean attribute, such as an `<input>` value to whether or not an item is in a list.
+@description A [can-stache.registerConverter converter] that binds a boolean attribute, such as an `<input>` value, to whether or not an item is in a list.
 
 @signature `boolean-to-inList(item, list)`
 
@@ -14,7 +14,7 @@ When the setter is called, if the new value is truthy then the item will be adde
 
 @param {*} item The item to which to check
 @param {can-define/list/list|can-list|Array} list The list
-@return {can-compute} A compute that will be used by [can-stache-bindings] as a getter/setter when the element's value changes.
+@return {can-compute} A compute that will be used by [can-stache-bindings] as a getter/setter when the element’s value changes.
 
 @body
 

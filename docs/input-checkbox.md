@@ -7,7 +7,7 @@ Cross bind a value to a checkbox.
 
 ## Binding to checkboxes
 
-To bind to a checkbox and set a boolean value within your [can-view-scope scope], set up a [can-stache-bindings.twoWay two way] binding to the input's `checked` property like so:
+To bind to a checkbox and set a boolean value within your [can-view-scope scope], set up a [can-stache-bindings.twoWay two-way] binding to the input’s `checked` property like so:
 
 ```
 <input type="checkbox" {($checked)}="val" />
@@ -23,7 +23,7 @@ Using [can-stache-converters.boolean-to-inList] is useful to two-way bind to a c
 
 ## Binding based on a binary decision
 
-An alternative true and false value can be specified by using [can-stache.converters.either-or]. This is used for setting up a "boolean" property that only has two possible valid values, whose values are modelled by the true/false checked property of a checkbox, as in the following example:
+An alternative true and false value can be specified by using [can-stache-converters.either-or]. This is used for setting up a “boolean” property that only has two possible valid values, whose values are modelled by the true/false checked property of a checkbox, as in the following example:
 
 
 ```

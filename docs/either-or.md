@@ -1,23 +1,23 @@
 @function can-stache-converters.either-or either-or
 @parent can-stache-converters.converters
-@description a [can-stache-registerConverter converter] that two-way binds to a checkbox two values provided as arguments. This converter is useful when you have a binary decision that your user will implicitly understand.
+@description A [can-stache.registerConverter converter] that two-way binds to a checkbox two values provided as arguments. This converter is useful when you have a binary decision that your user will implicitly understand.
 
 @signature `either-or(~chosen, a, b)`
 
 When the getter is called, gets the value of the **chosen** compute and if it is equal to **a** returns true, otherwise it returns false.
 
-When the setter is called, if the new value is truthy, sets the **chosen** [can-compute] to **a**'s value, otherwise sets it to **b**'s value.
+When the setter is called, if the new value is truthy, sets the **chosen** [can-compute] to **a**’s value, otherwise sets it to **b**’s value.
 
 ```handlebars
 <span>Favorite superhero:</span>
 <input type="checkbox" {($checked)}="either-or(~chosen, 'Batman', 'Superman')"> Batman?
 ```
 
-@param {can-compute} chosen A compute where the chosen value (between `a` and `b` is stored). When the setter is called, this compute's value will be updated.
+@param {can-compute} chosen A compute where the chosen value (between `a` and `b` is stored). When the setter is called, this compute’s value will be updated.
 
-@param {*} a The `true` value. If the checkbox is checked, then **a**'s value will be stored in the **chosen** compute.
+@param {*} a The `true` value. If the checkbox is checked, then **a**’s value will be stored in the **chosen** compute.
 
-@param {*} b The `false` value. If the checkbox is unchecked, then **b**'s value will be stored in the **chosen** compute.
+@param {*} b The `false` value. If the checkbox is unchecked, then **b**’s value will be stored in the **chosen** compute.
 
 @return {can-compute} A compute that will be used by [can-stache-bindings] as a getter/setter bound to the element.
 

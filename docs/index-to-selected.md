@@ -6,7 +6,7 @@
 
 When the getter is called, returns the index of the passed in item (which should be a [can-compute] from the provided list.
 
-When the setter is called, takes the selected index value and finds the item from the list with that index and passes that to set the compute's value.
+When the setter is called, takes the selected index value and finds the item from the list with that index and passes that to set the compute’s value.
 
 ```handlebars
 <select {($value)}="index-to-selected(~person, people)">
@@ -22,7 +22,7 @@ When the setter is called, takes the selected index value and finds the item fro
 
 @param {can-compute} item A compute whose item is in the list.
 @param {can-define/list/list|can-list|Array} list A list used to find the `item`.
-@return {can-compute} A compute that will be two-way bound to the select's value.
+@return {can-compute} A compute that will be two-way bound to the select’s value.
 
 @body
 

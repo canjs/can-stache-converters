@@ -6,9 +6,9 @@
 
 When the getter is called, gets the value of the compute and returns the negation.
 
-When the setter is called, sets the compute's value to the negation of the new value derived from the element.
+When the setter is called, sets the compute’s value to the negation of the new value derived from the element.
 
-*Note* that `not` needs a compute so that it can update the scope's value when the setter is called.
+*Note* that `not` needs a compute so that it can update the scope’s value when the setter is called.
 
 ```handlebars
 <input type="checkbox" {($checked)}="not(~val)" />
@@ -48,7 +48,7 @@ map.val === true; // because the checkbox is now false.
 
 ### Combined with other converters
 
-`not()` can be useful when used in combination with other converters that deal with boolean conversion. [can-stache-converters.boolean-to-inList] determines if an item is in a list. Here we wrap `not()` around this conversion so that the inverse is what is saved in the map's value:
+`not()` can be useful when used in combination with other converters that deal with boolean conversion. [can-stache-converters.boolean-to-inList] determines if an item is in a list. Here we wrap `not()` around this conversion so that the inverse is what is saved in the map’s value:
 
 ```handlebars
 <input type="checkbox" {($checked)}="not(~boolean-to-inList(item, list))" />
@@ -71,7 +71,7 @@ map.item = 4;
 
 input.checked; // -> true
 
-// Check the input, whick will set it's value to `false`
+// Check the input, whick will set its value to `false`
 // This will be converted to `true` by not() and pushed into the list
 
 map.list.indexOf(4); // -> 3
