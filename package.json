@@ -46,7 +46,7 @@
   "devDependencies": {
     "bit-docs": "0.0.7",
     "can-compute": "^3.0.0",
-    "can-define": "^0.7.29",
+    "can-define": "^1.0.5",
     "can-event": "^3.0.1",
     "documentjs": "^0.4.2",
     "done-serve": "^0.3.0-pre.0",
@@ -56,7 +56,7 @@
     "steal": "^0.16.0",
     "steal-qunit": "^0.1.1",
     "steal-tools": "^0.16.0",
-    "testee": "^0.2.4"
+    "testee": "^0.3.0"
   },
   "bit-docs": {
     "dependencies": {
