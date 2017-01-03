@@ -41,7 +41,7 @@
   "dependencies": {
     "can-stache": "^3.0.1",
     "can-stache-bindings": "^3.0.1",
-    "can-util": "^3.0.1"
+    "can-util": "^3.2.2"
   },
   "devDependencies": {
     "bit-docs": "0.0.7",
