@@ -1,5 +1,5 @@
-@function can-stache-converters.pages.select select 
-@parent can-stache-converters.pages
+@function can-stache-converters.examples.select select 
+@parent can-stache-converters.examples
 
 Cross bind a value to a `<select>` element.
 

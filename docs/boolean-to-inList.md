@@ -9,7 +9,7 @@ When the getter is called, returns true if **item** is within the **list**, dete
 When the setter is called, if the new value is truthy then the item will be added to the list using `.push`; if it is falsey the item will removed from the list using `.splice`.
 
 ```handlebars
-<input type="checkbox" {($value)}="boolean-to-inList(item, list)" />
+<input type="checkbox" {($checked)}="boolean-to-inList(item, list)" />
 ```
 
 @param {*} item The item to which to check
@@ -28,7 +28,7 @@ var map = new DefineMap({
 	list: [1, 2, 3, 4, 5]
 });
 
-var template = stache('<input type="checkbox" {($value)}="boolean-to-inList(item, list)" />');
+var template = stache('<input type="checkbox" {($checked)}="boolean-to-inList(item, list)" />');
 
 document.body.appendChild(template(map));
 
@@ -45,3 +45,4 @@ map.list.push(6);
 console.log(input.checked); // -> true
 ```
 
+@demo demos/can-stache-converters/input-checkbox.html

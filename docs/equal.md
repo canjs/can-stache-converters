@@ -24,6 +24,8 @@ In this example, the `color` scope value will be set to 'red' when the first rad
 
 When the getter is called the two values will be compared and if they are equal, returns true.
 
+In this example there is only a one-way binding, parent to child, so there is no setter case.  This removes the requirement that the first argument is converted to a compute with `~`.
+
 ```handlebars
 <my-modal {show}="equal(showModal, true)" />
 ```
@@ -64,3 +66,6 @@ vm.captain = vm.players[0];
 var frag = template(vm);
 document.body.appendChild(frag);
 ```
+
+@demo demos/can-stache-converters/input-radio.html
+
