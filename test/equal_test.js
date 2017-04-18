@@ -50,3 +50,31 @@ QUnit.test("Allows one-way binding when passed a non-compute as the first argume
 
 	QUnit.equal(attending(), true, 'does not change compute');
 });
+
+QUnit.test("Allow multiple expressions to be passed in", function() {
+	var template = stache('<input type="radio" {($checked)}="equal(~foo, ~bar, true)" />');
+	var foo = compute(true);
+	var bar = compute(false);
+
+	var input = template({
+		foo: foo,
+		bar: bar
+	}).firstChild;
+
+	QUnit.equal(input.checked, false, 'initially unchecked');
+
+	bar(true);
+
+	QUnit.equal(input.checked, true, 'now checked');
+
+	foo(false);
+	bar(false);
+
+	QUnit.equal(input.checked, false, 'now unchecked');
+
+	input.checked = true;
+	canEvent.trigger.call(input, "change");
+
+	QUnit.equal(foo(), true, 'computed foo value is true');
+	QUnit.equal(bar(), true, 'computed bar value is true');
+});

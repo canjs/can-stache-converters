@@ -1,5 +1,6 @@
 var stache = require("can-stache");
 var stringToAny = require("can-util/js/string-to-any/string-to-any");
+var makeArray = require("can-util/js/make-array/make-array");
 require("can-stache-bindings");
 
 stache.registerConverter("boolean-to-inList", {
@@ -69,13 +70,26 @@ stache.registerConverter("either-or", {
 });
 
 stache.registerConverter("equal", {
-	get: function(compute, comparer){
-		var val = (compute && compute.isComputed) ? compute() : compute;
-		return val === comparer;
+	get: function(){
+		var args = makeArray(arguments);
+		if (args.length > 1) {
+			var comparer = args.pop();
+
+			return args.every(function(compute) {
+				return (compute && compute.isComputed ? compute() : compute) === comparer;
+			});
+		}
 	},
-	set: function(b, compute, comparer){
-		if(b) {
-			compute(comparer);
+	set: function(){
+		var args = makeArray(arguments);
+		if (args.length > 2) {
+			var b = args.shift();
+			var comparer = args.pop();
+			if(b) {
+				for(var i = 0; i < args.length; i++) {
+					args[i](comparer);
+				}
+			}
 		}
 	}
 });
