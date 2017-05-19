@@ -1,5 +1,5 @@
-@page can-stache-converters.pages.input-radio input[type=radio]
-@parent can-stache-converters.pages
+@page can-stache-converters.examples.input-radio input[type=radio]
+@parent can-stache-converters.examples
 
 Cross bind a value to a radio input.
 
@@ -7,7 +7,7 @@ Cross bind a value to a radio input.
 
 ## Binding to radios
 
-To bind to a radio input, if you have a set of boolean values you can bind to the input’s `checked` property as you do with [can-stache-converters.pages.input-checkbox].
+To bind to a radio input, if you have a set of boolean values you can bind to the input’s `checked` property as you do with [can-stache-converters.examples.input-checkbox].
 
 ```handlebars
 <input type="radio" {($checked)}="one" /> One
