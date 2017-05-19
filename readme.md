@@ -1,5 +1,7 @@
 # can-stache-converters
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/canjs/can-stache-converters.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/canjs/can-stache-converters.png?branch=master)](https://travis-ci.org/canjs/can-stache-converters)
 
 A set of common [stache converters](http://canjs.github.io/canjs/doc/can-stache.registerConverter.html) to use with forms in your application.
