@@ -1,6 +1,6 @@
 {
   "name": "can-stache-converters",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Common converters for Stache",
   "homepage": "https://github.com/canjs/can-stache-converters",
   "repository": {
