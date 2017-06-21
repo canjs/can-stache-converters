@@ -7,7 +7,11 @@ var each = require("can-util/js/each/each");
 
 var QUnit = require("steal-qunit");
 
-QUnit.module("boolean-to-inList");
+QUnit.module("boolean-to-inList", {
+	setup: function(){
+		this.fixture = document.getElementById('qunit-fixture');
+	}
+});
 
 QUnit.test("Works with checkboxes", function(){
 	var template = stache("<input type='checkbox' {($checked)}='boolean-to-inList(item, list)' />");
@@ -71,6 +75,8 @@ QUnit.test("works with radio buttons", function(){
 	var radioOne = frag.firstChild.firstChild;
 	var radioTwo = radioOne.nextSibling;
 
+	this.fixture.appendChild(frag);
+
 	// Initial state
 	QUnit.equal(radioOne.checked, false, "Matthew not checked");
 	QUnit.equal(radioTwo.checked, true, "Wilbur is checked");
@@ -81,4 +87,3 @@ QUnit.test("works with radio buttons", function(){
 	QUnit.equal(radioOne.checked, true, "Matthew is checked");
 	QUnit.equal(radioTwo.checked, false, "Wilbur is not checked");
 });
-
