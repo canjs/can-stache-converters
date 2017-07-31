@@ -1,6 +1,7 @@
 var stache = require("can-stache");
 var stringToAny = require("can-util/js/string-to-any/string-to-any");
 var makeArray = require("can-util/js/make-array/make-array");
+var dev = require("can-util/js/dev/dev");
 require("can-stache-bindings");
 
 stache.registerConverter("boolean-to-inList", {
@@ -62,7 +63,24 @@ stache.registerConverter("index-to-selected", {
 
 stache.registerConverter("either-or", {
 	get: function(chosen, a, b){
-		return b !== chosen();
+		var matchA = (a === chosen());
+		var matchB = (b === chosen());
+
+		if (!matchA && !matchB) {
+			//!steal-remove-start
+			dev.warn(
+				"can-stache-converter.either-or:",
+				"`" + chosen() + "`",
+				"does not match `" + a + "`",
+				"or `" + b + "`"
+			);
+			//!steal-remove-end
+
+			return;
+		}
+		else {
+			return matchA;
+		}
 	},
 	set: function(newVal, chosen, a, b){
 		chosen(newVal ? a : b);

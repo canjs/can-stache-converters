@@ -1,5 +1,6 @@
 require("can-stache-converters");
 var canEvent = require("can-event");
+var compute = require("can-compute");
 var DefineMap = require("can-define/map/map");
 var stache = require("can-stache");
 var QUnit = require("steal-qunit");
@@ -7,12 +8,12 @@ var QUnit = require("steal-qunit");
 QUnit.module("either-or");
 
 QUnit.test("can bind to a checkbox", function(){
-	var template = stache("<input type='checkbox' {($checked)}='either-or(~pref, \"Star Trek\", \"Star Wars\")' />");
+	var renderer = stache("<input type='checkbox' {($checked)}='either-or(~pref, \"Star Trek\", \"Star Wars\")' />");
 	var map = new DefineMap({
 		pref: "Star Trek"
 	});
 
-	var input = template(map).firstChild;
+	var input = renderer(map).firstChild;
 
 	QUnit.equal(input.checked, true, "initial value is right");
 
@@ -25,3 +26,68 @@ QUnit.test("can bind to a checkbox", function(){
 	QUnit.equal(input.checked, true, "changed because map changed");
 });
 
+QUnit.test("initial null selection", function() {
+	var renderer = stache("<input type='checkbox' {($checked)}='either-or(~pref, \"Yes\", \"No\")' />");
+	var map = new DefineMap({
+		pref: null
+	});
+	var input = renderer(map).firstChild;
+
+	QUnit.equal(input.checked, false, "checkbox is unchecked");
+	QUnit.strictEqual(map.pref, "No", "null value changed to falsey case by checkbox");
+
+	input.checked = true;
+	canEvent.trigger.call(input, "change");
+	QUnit.equal(map.pref, "Yes", "map updated because check was checked");
+});
+
+QUnit.test("initial undefined selection", function() {
+	var renderer = stache("<input type='checkbox' {($checked)}='either-or(~pref, \"Yes\", \"No\")' />");
+	var map = new DefineMap({
+		pref: undefined
+	});
+	var input = renderer(map).firstChild;
+
+	QUnit.equal(input.checked, false, "checkbox is unchecked");
+	QUnit.strictEqual(map.pref, "No", "undefined value changed to falsey case by checkbox");
+
+	input.checked = true;
+	canEvent.trigger.call(input, "change");
+	QUnit.equal(map.pref, "Yes", "map updated because check was checked");
+});
+
+QUnit.test("initial no match selection", function() {
+	var renderer = stache("<input type='checkbox' {($checked)}='either-or(~pref, \"Yes\", \"No\")' />");
+	var map = new DefineMap({
+		pref: "fubar"
+	});
+	var input = renderer(map).firstChild;
+
+	QUnit.equal(input.checked, false, "checkbox is unchecked");
+	QUnit.strictEqual(map.pref, "No", "fubar value changed to falsey case by checkbox");
+
+	input.checked = true;
+	canEvent.trigger.call(input, "change");
+	QUnit.equal(map.pref, "Yes", "map updated because check was checked");
+});
+
+QUnit.test("supports computes", function() {
+	var renderer = stache("<input type='checkbox' {($checked)}='either-or(~pref, a, b)' />");
+	var map = new DefineMap({
+		pref: compute("Maybe"),
+		a: compute("Yes"),
+		b: compute("No")
+	});
+	var input = renderer(map).firstChild;
+
+	QUnit.equal(input.checked, false, "checkbox is unchecked");
+	QUnit.strictEqual(map.pref(), "No", "chosen value changed to falsey case by checkbox");
+
+	input.checked = true;
+	canEvent.trigger.call(input, "change");
+	QUnit.equal(map.pref(), "Yes", "map updated because check was checked");
+
+	input.checked = false;
+	canEvent.trigger.call(input, "change");
+	QUnit.equal(map.pref(), "No", "map updated because check was unchecked");
+});
