@@ -27,7 +27,7 @@ When the setter is called, if the new value is truthy then the item will be adde
 ```
 
 
-1. __item__ <code>{*}</code>:
+1. __item__ <code>{\*}</code>:
   The item to which to check
 1. __list__ <code>{can-define/list/list|can-list|Array}</code>:
   The list
@@ -111,23 +111,32 @@ When the setter is called, takes the selected index value and finds the item fro
 ### <code>either-or(~chosen, a, b)</code>
 
 
-When the getter is called, gets the value of the **chosen** compute and if it is equal to **a** returns true, otherwise it returns false.
-
-When the setter is called, if the new value is truthy, sets the **chosen** [can-compute] to **a**'s value, otherwise sets it to **b**'s value.
+Map values to boolean attributes.
 
 ```handlebars
-<span>Favorite superhero:</span>
-<input type="checkbox" {($checked)}="either-or(~chosen, 'Batman', 'Superman')"> Batman?
+<span>Want some?</span>
+<label>
+  <input type="checkbox" {($checked)}="either-or(~wantSome, 'Yes', 'No')"> Yes
+</label>
 ```
 
+| property | initial _~chosen_ value | _a_: truthy case  | _b_: falsey  case | either-or return | final ~chosen value
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
+| wantSome | Yes | Yes | No | true | Yes |
+| wantSome | No | Yes | No | false | No |
+| wantSome | __Maybe__ | Yes | No | undefined\* | __No__ |
+| wantSome | __undefined__ | Yes | No | undefined\* | __No__ |
+| wantSome | __null__ | Yes | No | undefined\* | __No__ |
+
+_\* A dev warning is logged if neither a or b match ~chosen._
 
 1. __chosen__ <code>{can-compute}</code>:
   A compute where the chosen value (between `a` and `b` is stored). When the setter is called, this compute's value will be updated.
   
-1. __a__ <code>{*}</code>:
+1. __a__ <code>{\*}</code>:
   The `true` value. If the checkbox is checked, then **a**'s value will be stored in the **chosen** compute.
   
-1. __b__ <code>{*}</code>:
+1. __b__ <code>{\*}</code>:
   The `false` value. If the checkbox is unchecked, then **b**'s value will be stored in the **chosen** compute.
   
 
