@@ -10,7 +10,7 @@ Cross bind a value to a checkbox.
 To bind to a checkbox and set a boolean value within your [can-view-scope scope], set up a [can-stache-bindings.twoWay two-way] binding to the input’s `checked` property like so:
 
 ```
-<input type="checkbox" {($checked)}="val" />
+<input type="checkbox" checked:bind="val" />
 ```
 
 [can-stache-converters] provides a couple of convenient converters that handle common use cases for binding to a checkbox.
@@ -27,7 +27,7 @@ An alternative true and false value can be specified by using [can-stache-conver
 
 
 ```
-<input type="checkbox" {($checked)}="either-or(~val, 'a', 'b')" />
+<input type="checkbox" checked:bind="either-or(~val, 'a', 'b')" />
 ```
 
 In this case, the data passed in as `val` is a [can-compute] that contains either the value **a** or **b**. If the value of `val` is **a** then the checkbox will be checked. When the user checks/unchecks the checkbox then the value of `val` is set to be either **a** or **b** depending on whether it is checked.

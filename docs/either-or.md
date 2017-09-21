@@ -10,7 +10,7 @@ When the setter is called, if the new value is truthy, sets the **chosen** [can-
 
 ```handlebars
 <span>Favorite superhero:</span>
-<input type="checkbox" {($checked)}="either-or(~chosen, 'Batman', 'Superman')"> Batman?
+<input type="checkbox" checked:bind="either-or(~chosen, 'Batman', 'Superman')"> Batman?
 ```
 
 @param {can-compute} chosen A compute where the chosen value (between `a` and `b` is stored). When the setter is called, this compute’s value will be updated.
@@ -33,7 +33,7 @@ You pass 3 arguments to this [can-stache.registerConverter converter]. The first
 ```handlebars
 <p>
 	<input type="checkbox"
-		({$checked})="either-or(~pref, 'Star Trek', 'Star Wars')" />
+		checked:bind="either-or(~pref, 'Star Trek', 'Star Wars')" />
 	<span>Star Trek</span>
 </p>
 
