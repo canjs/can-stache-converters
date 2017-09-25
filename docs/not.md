@@ -11,7 +11,7 @@ When the setter is called, sets the compute’s value to the negation of the new
 *Note* that `not` needs a compute so that it can update the scope’s value when the setter is called.
 
 ```handlebars
-<input type="checkbox" {($checked)}="not(~val)" />
+<input type="checkbox" checked:bind="not(~val)" />
 ```
 
 @param {can-compute} value A value stored in a [can-compute].
@@ -24,7 +24,7 @@ When the setter is called, sets the compute’s value to the negation of the new
 Use this converter to two-way bind to the negation of some value. For example:
 
 ```handlebars
-<input type="checkbox" {($checked)}="not(~val)" />
+<input type="checkbox" checked:bind="not(~val)" />
 ```
 
 ```js
@@ -51,7 +51,7 @@ map.val === true; // because the checkbox is now false.
 `not()` can be useful when used in combination with other converters that deal with boolean conversion. [can-stache-converters.boolean-to-inList] determines if an item is in a list. Here we wrap `not()` around this conversion so that the inverse is what is saved in the map’s value:
 
 ```handlebars
-<input type="checkbox" {($checked)}="not(~boolean-to-inList(item, list))" />
+<input type="checkbox" checked:bind="not(~boolean-to-inList(item, list))" />
 ```
 
 ```js

@@ -3,7 +3,7 @@
 
 Cross bind a value to a `<select>` element.
 
-@signature `{($value)}="KEY"`
+@signature `value:bind="KEY"`
 
 Cross binds the selected option value with an observable value.
 

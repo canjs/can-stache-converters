@@ -3,7 +3,7 @@
 
 Cross bind a value to a `<select>` element with multiple selections permitted.
 
-@signature `<select multiple {($values)}="KEY"/>`
+@signature `<select multiple values:bind="KEY"/>`
 
 Cross binds the selected option values with an observable value.
 
@@ -16,7 +16,7 @@ or `undefined`.
 
 ## Use
 
-Select elements with the multiple attribute (`<select multiple {($values)}="KEY"/>`)
+Select elements with the multiple attribute (`<select multiple values:bind="KEY"/>`)
 have a specified behavior if the value of KEY is Array-like or
 `undefined`.
 
@@ -28,7 +28,7 @@ in sync with the selected items of the `<select>` element.
 
 For example, the following template:
 
-    <select multiple {($values)}="colors">
+    <select multiple values:bind="colors">
       <option value='red'>Red</option>
       <option value='green'>Green</option>
       <option value='yellow'>Yellow</option>

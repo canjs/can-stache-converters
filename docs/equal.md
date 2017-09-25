@@ -9,8 +9,8 @@ When the getter is called **compute**, a [can-compute.computed], is compared to 
 When the setter is called, if the radio is now checked the **compute**'s setter is called with **value** as the value.
 
 ```handlebars
-<input type="radio" {($checked)}="equal(~color, 'red')" /> Red
-<input type="radio" {($checked)}="equal(~color, 'blue')" /> Blue
+<input type="radio" checked:bind="equal(~color, 'red')" /> Red
+<input type="radio" checked:bind="equal(~color, 'blue')" /> Blue
 ```
 
 In this example, the `color` scope value will be set to 'red' when the first radio is selected and 'blue' when the second radio is selected.
@@ -27,7 +27,7 @@ When the getter is called the two values will be compared and if they are equal,
 In this example there is only a one-way binding, parent to child, so there is no setter case.  This removes the requirement that the first argument is converted to a compute with `~`.
 
 ```handlebars
-<my-modal {show}="equal(showModal, true)" />
+<my-modal show:from="equal(showModal, true)" />
 ```
 
 In this example, the `show` value of `my-modal`'s view model will be set to `true` when `showModal` in the scope is set to true.
@@ -47,7 +47,7 @@ In this example we are using objects, to select a captain from one of three play
 
 ```handlebars
 {{#each players}}
-	<input type="radio" {($checked)}="equal(~captain, this)" /> {{name}}
+	<input type="radio" checked:bind="equal(~captain, this)" /> {{name}}
 {{/each}}
 ```
 
