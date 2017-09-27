@@ -43,3 +43,29 @@ QUnit.test("chooses select option by the index from a list", function(){
 
 	QUnit.equal(map.person, undefined, "now undefined because not in the list");
 });
+
+QUnit.test("handle empty selection #22", function(){
+	var template = stache('<select {($value)}="index-to-selected(~person, people)"><option value="-1">Select a person</option>{{#each people}}<option value="{{%index}}">{{name}}</option>{{/each}}</select>');
+
+	var map = new DefineMap({
+		person: "Anne",
+		people: [
+			"Matthew",
+			"Anne",
+			"Wilbur"
+		]
+	});
+
+	var select = template(map).firstChild;
+
+	select.value = "-1";
+	canEvent.trigger.call(select, "change");
+
+	QUnit.equal(map.person, undefined, "now undefined because not in the list");
+
+	// Select a different thing.
+	select.value = 2;
+	canEvent.trigger.call(select, "change");
+
+	QUnit.equal(map.person, "Wilbur", "now it is me");
+});
