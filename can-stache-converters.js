@@ -12,7 +12,6 @@ stache.registerConverter("boolean-to-inList", {
 			return list.indexOf(item) !== -1;
 		}
 	},
-
 	set: function(newVal, item, list){
 		if(!list) {
 			return;
@@ -55,8 +54,22 @@ stache.registerConverter("index-to-selected", {
 	},
 	set: function(idx, item, list){
 		var newVal = list[idx];
-		if(newVal !== -1 && item.isComputed) {
+		if(item.isComputed) {
 			item(newVal);
+		}
+	}
+});
+
+stache.registerConverter("selected-to-index", {
+	get: function(idx, list){
+		var val = idx.isComputed ? idx() : idx;
+		var item = list[val];
+		return item;
+	},
+	set: function(item, idx, list){
+		var newVal = list.indexOf(item);
+		if(idx.isComputed) {
+			idx(newVal);
 		}
 	}
 });
