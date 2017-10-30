@@ -1,5 +1,6 @@
 @module can-stache-converters
-@parent can-ecosystem
+@parent can-views
+@collection can-ecosystem
 @group can-stache-converters.examples Examples
 @group can-stache-converters.converters Converters
 @package ../package.json
