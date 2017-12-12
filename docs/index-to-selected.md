@@ -13,7 +13,7 @@ When the setter is called, takes the selected index value and finds the item fro
 
 	{{#each people}}
 
-		<option value="{{%index}}">{{name}}</option>
+		<option value="{{scope.index}}">{{name}}</option>
 
 	{{/each}}
 

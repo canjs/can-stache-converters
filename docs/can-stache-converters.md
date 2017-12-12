@@ -54,5 +54,4 @@ For multiple-selection lists, `values:bind="key"` cross-binds selected options w
 The value of the observable is changed after the textarea's `change` event,
 which is after `blur`.
 
-> There is a way of making changes respond to key events as well: `on:keyup="%scope.set('key', %element.value)`.  However, this  sets the value of `key` at the current scope level.  If `key` was set at a higher level of the scope, the cross binding of `value:bind` will not point to the same item as the keyup target.
-
+> There is a way of making changes respond to key events as well: `on:keyup="scope.set('key', scope.element.value)`.  However, this  sets the value of `key` at the current scope level.  If `key` was set at a higher level of the scope, the cross binding of `value:bind` will not point to the same item as the keyup target.
