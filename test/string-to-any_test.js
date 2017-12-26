@@ -1,7 +1,7 @@
 require("can-stache-converters");
-var canEvent = require("can-event");
 var DefineList = require("can-define/list/list");
 var DefineMap = require("can-define/map/map");
+var domEvents = require("can-util/dom/events/events");
 var stache = require("can-stache");
 var each = require("can-util/js/each/each");
 
@@ -31,7 +31,7 @@ QUnit.test("Works on all the types", function(){
 	};
 
 	each(types, function(expected, type){
-		var template = stache('<select {($value)}="string-to-any(~val)"><option value="test">test</option><option value="' + type + '">' + type + '</option></select>');
+		var template = stache('<select value:bind="string-to-any(~val)"><option value="test">test</option><option value="' + type + '">' + type + '</option></select>');
 		var map = new DefineMap({
 			val: "test"
 		});
@@ -48,7 +48,7 @@ QUnit.test("Works on all the types", function(){
 
 		// Select this type's option
 		select.value = type;
-		canEvent.trigger.call(select, "change");
+		domEvents.dispatch.call(select, "change");
 
 		QUnit.ok(equality(map.val, expected), "map's value updated to: " + type);
 

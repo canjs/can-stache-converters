@@ -1,7 +1,7 @@
 require("can-stache-converters");
-var canEvent = require("can-event");
 var DefineList = require("can-define/list/list");
 var DefineMap = require("can-define/map/map");
+var domEvents = require("can-util/dom/events/events");
 var stache = require("can-stache");
 var each = require("can-util/js/each/each");
 
@@ -28,7 +28,7 @@ QUnit.test("sets index by the value from a list", function(){
 
 	// Select a different thing.
 	input.value = "Wilbur";
-	canEvent.trigger.call(input, "change");
+	domEvents.dispatch.call(input, "change");
 
 	QUnit.equal(map.index, "2", "now it is me");
 
@@ -39,7 +39,7 @@ QUnit.test("sets index by the value from a list", function(){
 
 	// Can be set to other stuff too
 	input.value = "none";
-	canEvent.trigger.call(input, "change");
+	domEvents.dispatch.call(input, "change");
 
 	QUnit.equal(map.index, -1, "now -1 because not in the list");
 });
