@@ -1,3 +1,4 @@
+var canReflect = require("can-reflect");
 var stache = require("can-stache");
 var stringToAny = require("can-util/js/string-to-any/string-to-any");
 var makeArray = require("can-util/js/make-array/make-array");
@@ -28,21 +29,21 @@ stache.registerConverter("boolean-to-inList", {
 });
 
 stache.registerConverter("string-to-any", {
-	get: function(compute){
-		return "" + compute();
+	get: function(obs){
+		return "" + canReflect.getValue(obs);
 	},
-	set: function(newVal, compute){
+	set: function(newVal, obs){
 		var converted = stringToAny(newVal);
-		compute(converted);
+		canReflect.setValue(obs, converted);
 	}
 });
 
 stache.registerConverter("not", {
-	get: function(compute){
-		return !compute();
+	get: function(obs){
+		return !canReflect.getValue(obs);
 	},
-	set: function(newVal, compute){
-		compute(!newVal);
+	set: function(newVal, obs){
+		canReflect.setValue(obs, !newVal);
 	}
 });
 
@@ -62,28 +63,27 @@ stache.registerConverter("index-to-selected", {
 
 stache.registerConverter("selected-to-index", {
 	get: function(idx, list){
-		var val = idx.isComputed ? idx() : idx;
+		var val = canReflect.getValue(idx);
 		var item = list[val];
 		return item;
 	},
 	set: function(item, idx, list){
 		var newVal = list.indexOf(item);
-		if(idx.isComputed) {
-			idx(newVal);
-		}
+		canReflect.setValue(idx, newVal);
 	}
 });
 
 stache.registerConverter("either-or", {
 	get: function(chosen, a, b){
-		var matchA = (a === chosen());
-		var matchB = (b === chosen());
+		var chosenVal = canReflect.getValue(chosen);
+		var matchA = (a === chosenVal);
+		var matchB = (b === chosenVal);
 
 		if (!matchA && !matchB) {
 			//!steal-remove-start
 			dev.warn(
 				"can-stache-converter.either-or:",
-				"`" + chosen() + "`",
+				"`" + chosenVal + "`",
 				"does not match `" + a + "`",
 				"or `" + b + "`"
 			);
@@ -96,29 +96,35 @@ stache.registerConverter("either-or", {
 		}
 	},
 	set: function(newVal, chosen, a, b){
-		chosen(newVal ? a : b);
+		var setVal = newVal ? a : b;
+		canReflect.setValue(chosen, setVal);
 	}
 });
 
 stache.registerConverter("equal", {
 	get: function(){
 		var args = makeArray(arguments);
+		// We don't need the helperOptions
+		args.pop();
 		if (args.length > 1) {
 			var comparer = args.pop();
 
-			return args.every(function(compute) {
-				return (compute && compute.isComputed ? compute() : compute) === comparer;
+			return args.every(function(obs) {
+				var value = canReflect.getValue(obs);
+				return value === comparer;
 			});
 		}
 	},
 	set: function(){
 		var args = makeArray(arguments);
+		// Ignore the helperOptions
+		args.pop();
 		if (args.length > 2) {
 			var b = args.shift();
 			var comparer = args.pop();
 			if(b) {
 				for(var i = 0; i < args.length; i++) {
-					args[i](comparer);
+					canReflect.setValue(args[i], comparer);
 				}
 			}
 		}

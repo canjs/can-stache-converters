@@ -1,9 +1,9 @@
 require("can-stache-converters");
-var canEvent = require("can-event");
 var DefineList = require("can-define/list/list");
 var DefineMap = require("can-define/map/map");
 var stache = require("can-stache");
 var each = require("can-util/js/each/each");
+var domEvents = require("can-util/dom/events/events");
 
 var QUnit = require("steal-qunit");
 
@@ -14,7 +14,7 @@ QUnit.module("boolean-to-inList", {
 });
 
 QUnit.test("Works with checkboxes", function(){
-	var template = stache("<input type='checkbox' {($checked)}='boolean-to-inList(item, list)' />");
+	var template = stache("<input type='checkbox' checked:bind='boolean-to-inList(item, list)' />");
 	var map = new DefineMap({
 		item: 2,
 		list: new DefineList([ 1, 2, 3 ])
@@ -27,7 +27,7 @@ QUnit.test("Works with checkboxes", function(){
 	QUnit.equal(map.list.indexOf(2), 1, "two is in the list");
 
 	input.checked = false;
-	canEvent.trigger.call(input, "change");
+	domEvents.dispatch.call(input, "change");
 
 	QUnit.equal(map.list.indexOf(2), -1, "No longer in the list");
 
@@ -43,13 +43,13 @@ QUnit.test("Works with checkboxes", function(){
 
 	map.item = 6;
 	input.checked = true;
-	canEvent.trigger.call(input, "change");
+	domEvents.dispatch.call(input, "change");
 
 	QUnit.equal(map.list.indexOf(6), 3, "pushed into the list");
 });
 
 QUnit.test("If there is no list, treated as false", function(){
-	var template = stache("<input type='checkbox' {($checked)}='boolean-to-inList(item, list)' />");
+	var template = stache("<input type='checkbox' checked:bind='boolean-to-inList(item, list)' />");
 	var map = new DefineMap({
 		item: 2,
 		list: undefined
@@ -60,13 +60,13 @@ QUnit.test("If there is no list, treated as false", function(){
 	QUnit.ok(!input.checked, "not checked because there is no list");
 
 	input.checked = true;
-	canEvent.trigger.call(input, "change");
+	domEvents.dispatch.call(input, "change");
 
 	QUnit.ok(true, "no errors thrown");
 });
 
 QUnit.test("works with radio buttons", function(){
-	var template = stache("<form><input type='radio' name='name' value='Matthew' {($checked)}='boolean-to-inList(\"Matthew\", names)' /><input type='radio' name='name' value='Wilbur' {($checked)}='boolean-to-inList(\"Wilbur\", names)' /></form>");
+	var template = stache("<form><input type='radio' name='name' value='Matthew' checked:bind='boolean-to-inList(\"Matthew\", names)' /><input type='radio' name='name' value='Wilbur' checked:bind='boolean-to-inList(\"Wilbur\", names)' /></form>");
 	var map = new DefineMap({
 		names: ['Wilbur']
 	});
@@ -82,7 +82,7 @@ QUnit.test("works with radio buttons", function(){
 	QUnit.equal(radioTwo.checked, true, "Wilbur is checked");
 
 	radioOne.checked = true;
-	canEvent.trigger.call(radioOne, "change");
+	domEvents.dispatch.call(radioOne, "change");
 
 	QUnit.equal(radioOne.checked, true, "Matthew is checked");
 	QUnit.equal(radioTwo.checked, false, "Wilbur is not checked");

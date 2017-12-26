@@ -1,8 +1,8 @@
 require("can-stache-converters");
-var canEvent = require("can-event");
 var compute = require("can-compute");
 var DefineList = require("can-define/list/list");
 var DefineMap = require("can-define/map/map");
+var domEvents = require("can-util/dom/events/events");
 var stache = require("can-stache");
 var each = require("can-util/js/each/each");
 
@@ -11,7 +11,7 @@ var QUnit = require("steal-qunit");
 QUnit.module("equal");
 
 QUnit.test("Basics works", function(){
-	var template = stache('<input type="radio" {($checked)}="equal(~attending, \'yes\'" /><input type="radio" {($checked)}="equal(~attending, \'no\'" />');
+	var template = stache('<input type="radio" checked:bind="equal(~attending, \'yes\'" /><input type="radio" checked:bind="equal(~attending, \'no\'" />');
 	var attending = compute("yes");
 
 	var yes = template({ attending: attending }).firstChild,
@@ -27,7 +27,7 @@ QUnit.test("Basics works", function(){
 
 	// User changing stuff
 	yes.checked = true;
-	canEvent.trigger.call(yes, "change");
+	domEvents.dispatch.call(yes, "change");
 
 	QUnit.equal(attending(), "yes", "now it is yes");
 	QUnit.equal(yes.checked, true, "yes is checked");
@@ -35,7 +35,7 @@ QUnit.test("Basics works", function(){
 });
 
 QUnit.test("Allows one-way binding when passed a non-compute as the first argument", function(){
-	var template = stache('<input type="radio" {($checked)}="equal(attending, true)" />');
+	var template = stache('<input type="radio" checked:bind="equal(attending, true)" />');
 	var attending = compute(false);
 
 	var input = template({ attending: attending }).firstChild;
@@ -52,7 +52,7 @@ QUnit.test("Allows one-way binding when passed a non-compute as the first argume
 });
 
 QUnit.test("Allow multiple expressions to be passed in", function() {
-	var template = stache('<input type="radio" {($checked)}="equal(~foo, ~bar, true)" />');
+	var template = stache('<input type="radio" checked:bind="equal(~foo, ~bar, true)" />');
 	var foo = compute(true);
 	var bar = compute(false);
 
@@ -73,7 +73,7 @@ QUnit.test("Allow multiple expressions to be passed in", function() {
 	QUnit.equal(input.checked, false, 'now unchecked');
 
 	input.checked = true;
-	canEvent.trigger.call(input, "change");
+	domEvents.dispatch.call(input, "change");
 
 	QUnit.equal(foo(), true, 'computed foo value is true');
 	QUnit.equal(bar(), true, 'computed bar value is true');
