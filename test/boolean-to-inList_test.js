@@ -3,7 +3,7 @@ var DefineList = require("can-define/list/list");
 var DefineMap = require("can-define/map/map");
 var stache = require("can-stache");
 var each = require("can-util/js/each/each");
-var domEvents = require("can-util/dom/events/events");
+var domEvents = require("can-dom-events");
 
 var QUnit = require("steal-qunit");
 
@@ -27,7 +27,7 @@ QUnit.test("Works with checkboxes", function(){
 	QUnit.equal(map.list.indexOf(2), 1, "two is in the list");
 
 	input.checked = false;
-	domEvents.dispatch.call(input, "change");
+	domEvents.dispatch(input, "change");
 
 	QUnit.equal(map.list.indexOf(2), -1, "No longer in the list");
 
@@ -43,7 +43,7 @@ QUnit.test("Works with checkboxes", function(){
 
 	map.item = 6;
 	input.checked = true;
-	domEvents.dispatch.call(input, "change");
+	domEvents.dispatch(input, "change");
 
 	QUnit.equal(map.list.indexOf(6), 3, "pushed into the list");
 });
@@ -60,7 +60,7 @@ QUnit.test("If there is no list, treated as false", function(){
 	QUnit.ok(!input.checked, "not checked because there is no list");
 
 	input.checked = true;
-	domEvents.dispatch.call(input, "change");
+	domEvents.dispatch(input, "change");
 
 	QUnit.ok(true, "no errors thrown");
 });
@@ -82,7 +82,7 @@ QUnit.test("works with radio buttons", function(){
 	QUnit.equal(radioTwo.checked, true, "Wilbur is checked");
 
 	radioOne.checked = true;
-	domEvents.dispatch.call(radioOne, "change");
+	domEvents.dispatch(radioOne, "change");
 
 	QUnit.equal(radioOne.checked, true, "Matthew is checked");
 	QUnit.equal(radioTwo.checked, false, "Wilbur is not checked");

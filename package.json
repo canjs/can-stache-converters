@@ -38,21 +38,16 @@
     "main": "can-stache-converters"
   },
   "dependencies": {
+    "can-dom-events": "^1.1.1",
     "can-reflect": "^1.11.1",
-    "can-stache": "^4.0.0-pre.0",
-    "can-stache-bindings": "^4.0.0-pre.0",
+    "can-stache": "^4.0.0",
+    "can-stache-bindings": "^4.0.2",
     "can-util": "^3.10.18"
   },
   "devDependencies": {
-    "bit-docs": "0.0.7",
-    "can-compute": "^4.0.0-pre.9",
-    "can-define": "^2.0.0-pre.24",
-    "can-event": "^3.5.0",
+    "can-compute": "^4.0.0",
+    "can-define": "^2.0.0",
     "detect-cyclic-packages": "^1.1.0",
-    "documentjs": "^0.4.2",
-    "done-serve": "^2.0.0-pre.0",
-    "donejs-cli": "^2.0.0-pre.0",
-    "generator-donejs": "^2.0.0-pre.2",
     "jshint": "^2.9.1",
     "steal": "^1.2.10",
     "steal-qunit": "^1.0.1",
