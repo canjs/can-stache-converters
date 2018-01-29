@@ -1,13 +1,33 @@
 require("can-stache-converters");
 var DefineList = require("can-define/list/list");
 var DefineMap = require("can-define/map/map");
-var domEvents = require("can-util/dom/events/events");
+var domEvents = require("can-dom-events");
 var stache = require("can-stache");
-var each = require("can-util/js/each/each");
 
 var QUnit = require("steal-qunit");
 
 QUnit.module("not");
+
+QUnit.test("saves the inverse of the selected value without ~ (#68)", function(){
+	var template = stache('<input type="checkbox" checked:bind="not(val)" />');
+	var map = new DefineMap({
+		val: true
+	});
+
+	var input = template(map).firstChild;
+
+	QUnit.equal(input.checked, false, "initially false");
+
+	map.val = false;
+
+	QUnit.equal(input.checked, true, "true because map val is false");
+
+	input.checked = false;
+	domEvents.dispatch(input, "change");
+
+	QUnit.equal(map.val, true, "map is now true because checkbox is false");
+});
+
 
 QUnit.test("saves the inverse of the selected value", function(){
 	var template = stache('<input type="checkbox" checked:bind="not(~val)" />');
@@ -24,7 +44,7 @@ QUnit.test("saves the inverse of the selected value", function(){
 	QUnit.equal(input.checked, true, "true because map val is false");
 
 	input.checked = false;
-	domEvents.dispatch.call(input, "change");
+	domEvents.dispatch(input, "change");
 
 	QUnit.equal(map.val, true, "map is now true because checkbox is false");
 });
@@ -45,7 +65,7 @@ QUnit.test("works with boolean-to-inList", function(){
 	QUnit.equal(input.checked, true, "checked because not in the list");
 
 	input.checked = false;
-	domEvents.dispatch.call(input, "change");
+	domEvents.dispatch(input, "change");
 
 	QUnit.equal(map.list.indexOf(4), 3, "it was pushed into the list");
 
