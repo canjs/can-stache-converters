@@ -1,3 +1,4 @@
+var canReflect = require("can-reflect");
 var stache = require("can-stache");
 var stringToAny = require("can-util/js/string-to-any/string-to-any");
 var makeArray = require("can-util/js/make-array/make-array");
@@ -27,65 +28,65 @@ stache.registerConverter("boolean-to-inList", {
 	}
 });
 
-stache.registerConverter("string-to-any", {
-	get: function(compute){
-		return "" + compute();
+stache.addConverter("string-to-any", {
+	get: function(obs){
+		return "" + canReflect.getValue(obs);
 	},
-	set: function(newVal, compute){
+	set: function(newVal, obs){
 		var converted = stringToAny(newVal);
-		compute(converted);
+		canReflect.setValue(obs, converted);
 	}
 });
 
-stache.registerConverter("not", {
-	get: function(compute){
-		return !compute();
+stache.addConverter("not", {
+	get: function(obs){
+		return !canReflect.getValue(obs);
 	},
-	set: function(newVal, compute){
-		compute(!newVal);
+	set: function(newVal, obs){
+		canReflect.setValue(obs, !newVal);
 	}
 });
 
-stache.registerConverter("index-to-selected", {
+stache.addConverter("index-to-selected", {
 	get: function(item, list){
-		var val = item.isComputed ? item() : item;
-		var idx = list.indexOf(val);
+		var val = canReflect.getValue(item);
+		var idx = canReflect.getValue(list).indexOf(val);
 		return idx;
 	},
 	set: function(idx, item, list){
-		var newVal = list[idx];
-		if(item.isComputed) {
-			item(newVal);
-		}
+		var newVal = canReflect.getValue(list)[idx];
+		canReflect.setValue(item, newVal);
 	}
 });
 
-stache.registerConverter("selected-to-index", {
+stache.addConverter("selected-to-index", {
 	get: function(idx, list){
-		var val = idx.isComputed ? idx() : idx;
-		var item = list[val];
+		var val = canReflect.getValue(idx),
+			listValue = canReflect.getValue(list);
+		var item = listValue[val];
 		return item;
 	},
 	set: function(item, idx, list){
-		var newVal = list.indexOf(item);
-		if(idx.isComputed) {
-			idx(newVal);
-		}
+		var newVal = canReflect.getValue(list).indexOf(item);
+		canReflect.setValue(idx, newVal);
 	}
 });
 
-stache.registerConverter("either-or", {
+stache.addConverter("either-or", {
 	get: function(chosen, a, b){
-		var matchA = (a === chosen());
-		var matchB = (b === chosen());
+		var chosenVal = canReflect.getValue(chosen),
+			aValue = canReflect.getValue(a),
+			bValue = canReflect.getValue(b);
+		var matchA = (aValue === chosenVal);
+		var matchB = (bValue === chosenVal);
 
 		if (!matchA && !matchB) {
 			//!steal-remove-start
 			dev.warn(
 				"can-stache-converter.either-or:",
-				"`" + chosen() + "`",
-				"does not match `" + a + "`",
-				"or `" + b + "`"
+				"`" + chosenVal + "`",
+				"does not match `" + aValue + "`",
+				"or `" + bValue + "`"
 			);
 			//!steal-remove-end
 
@@ -96,29 +97,35 @@ stache.registerConverter("either-or", {
 		}
 	},
 	set: function(newVal, chosen, a, b){
-		chosen(newVal ? a : b);
+		var setVal = newVal ? canReflect.getValue(a) : canReflect.getValue(b);
+		canReflect.setValue(chosen, setVal);
 	}
 });
 
-stache.registerConverter("equal", {
+stache.addConverter("equal", {
 	get: function(){
 		var args = makeArray(arguments);
+		// We don't need the helperOptions
+		args.pop();
 		if (args.length > 1) {
-			var comparer = args.pop();
+			var comparer = canReflect.getValue( args.pop() );
 
-			return args.every(function(compute) {
-				return (compute && compute.isComputed ? compute() : compute) === comparer;
+			return args.every(function(obs) {
+				var value = canReflect.getValue(obs);
+				return value === comparer;
 			});
 		}
 	},
 	set: function(){
 		var args = makeArray(arguments);
+		// Ignore the helperOptions
+		args.pop();
 		if (args.length > 2) {
 			var b = args.shift();
 			var comparer = args.pop();
 			if(b) {
 				for(var i = 0; i < args.length; i++) {
-					args[i](comparer);
+					canReflect.setValue(args[i], comparer);
 				}
 			}
 		}
