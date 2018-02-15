@@ -41,13 +41,13 @@ You pass 3 arguments to this [can-stache.registerConverter converter]. The first
 ```
 
 ```js
-var template = stache.from("demo-template");
+const template = stache.from( "demo-template" );
 
-var fan = new DefineMap({
+const fan = new DefineMap( {
 	pref: "Star Trek"
-});
+} );
 
-document.body.appendChild(template(fan));
+document.body.appendChild( template( fan ) );
 
 // User unchecks the checkbox
 fan.pref === "Star Wars";

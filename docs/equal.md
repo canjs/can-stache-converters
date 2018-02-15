@@ -52,19 +52,19 @@ In this example we are using objects, to select a captain from one of three play
 ```
 
 ```js
-var template = stache.from("demo");
-var vm = new DefineMap({
+const template = stache.from( "demo" );
+const vm = new DefineMap( {
 	captain: null,
 	players: [
 		{ name: "Matthew" },
 		{ name: "Wilbur" },
 		{ name: "Anne" }
 	]
-});
-vm.captain = vm.players[0];
+} );
+vm.captain = vm.players[ 0 ];
 
-var frag = template(vm);
-document.body.appendChild(frag);
+const frag = template( vm );
+document.body.appendChild( frag );
 ```
 
 @demo demos/can-stache-converters/input-radio.html

@@ -28,13 +28,13 @@ Use this converter to two-way bind to the negation of some value. For example:
 ```
 
 ```js
-var map = new DefineMap({
+const map = new DefineMap( {
 	val: true
-});
+} );
 
-document.body.appendChild(template(map));
+document.body.appendChild( template( map ) );
 
-var input = document.querySelector('input');
+const input = document.querySelector( "input" );
 
 input.checked; // -> false
 
@@ -55,13 +55,13 @@ map.val === true; // because the checkbox is now false.
 ```
 
 ```js
-var map = new DefineMap({
+const map = new DefineMap( {
 	item: 2,
-	list: new DefineList([ 1, 2, 3 ])
-});
+	list: new DefineList( [ 1, 2, 3 ] )
+} );
 
-document.body.appendChild(template(map));
-var input = document.querySelector('input');
+document.body.appendChild( template( map ) );
+const input = document.querySelector( "input" );
 
 
 input.checked; // -> false
@@ -74,10 +74,10 @@ input.checked; // -> true
 // Check the input, whick will set its value to `false`
 // This will be converted to `true` by not() and pushed into the list
 
-map.list.indexOf(4); // -> 3
+map.list.indexOf( 4 ); // -> 3
 
 // Remove it from the list, which will be converted to true by not()
-map.list.splice(3, 1);
+map.list.splice( 3, 1 );
 
 input.checked; // -> true
 ```

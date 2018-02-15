@@ -36,14 +36,14 @@ This is usually used with `<select>`s where you would like to two-way bind a str
 ```
 
 ```js
-var str = document.getElementById('select-template').innerHTML;
-var template = stache(str);
+const str = document.getElementById( "select-template" ).innerHTML;
+const template = stache( str );
 
-var map = new DefineMap({
+const map = new DefineMap( {
 	someValue: "foo"
-});
+} );
 
-document.body.appendChild(template(map));
+document.body.appendChild( template( map ) );
 
 map.item = NaN; // select.value becomes "NaN"
 

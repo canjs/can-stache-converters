@@ -23,26 +23,28 @@ When the setter is called, if the new value is truthy then the item will be adde
 Use this converter when two-way binding to an element with a boolean attribute, such as a checkbox.
 
 ```js
-var map = new DefineMap({
+const map = new DefineMap( {
 	item: 5,
-	list: [1, 2, 3, 4, 5]
-});
+	list: [ 1, 2, 3, 4, 5 ]
+} );
 
-var template = stache('<input type="checkbox" checked:bind="boolean-to-inList(item, list)" />');
+const template = stache(
+	"<input type=\"checkbox\" checked:bind=\"boolean-to-inList(item, list)\" />"
+);
 
-document.body.appendChild(template(map));
+document.body.appendChild( template( map ) );
 
-var input = document.querySelector('input[type=checkbox]');
+const input = document.querySelector( "input[type=checkbox]" );
 
-console.log(input.checked); // -> true
+console.log( input.checked ); // -> true
 
 map.item = 6;
 
-console.log(input.checked); // -> false
+console.log( input.checked ); // -> false
 
-map.list.push(6);
+map.list.push( 6 );
 
-console.log(input.checked); // -> true
+console.log( input.checked ); // -> true
 ```
 
 @demo demos/can-stache-converters/input-checkbox.html

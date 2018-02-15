@@ -15,13 +15,13 @@ To bind to a radio input, if you have a set of boolean values you can bind to th
 ```
 
 ```js
-var template = stache.from("demo");
-var map = new DefineMap({
+const template = stache.from( "demo" );
+const map = new DefineMap( {
 	one: true,
 	two: false
-});
+} );
 
-document.body.appendChild(template(map));
+document.body.appendChild( template( map ) );
 ```
 
 ## Binding to a selected value
