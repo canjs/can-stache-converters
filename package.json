@@ -49,7 +49,7 @@
     "can-define": "^2.0.0",
     "detect-cyclic-packages": "^1.1.0",
     "jshint": "^2.9.1",
-    "steal": "^1.2.10",
+    "steal": "^1.11.2",
     "steal-qunit": "^1.0.1",
     "steal-tools": "^1.1.2",
     "testee": "^0.7.0"
