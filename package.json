@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "can-dom-events": "^1.1.1",
-    "can-reflect": "^1.11.1",
+    "can-reflect": "^1.14.1",
     "can-stache": "^4.0.0",
     "can-stache-bindings": "^4.0.2",
     "can-util": "^3.10.18"
