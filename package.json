@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "can-compute": "^4.0.0",
-    "can-define": "^2.0.0",
+    "can-define": "^2.2.4",
     "detect-cyclic-packages": "^1.1.0",
     "jshint": "^2.9.1",
     "steal": "^1.2.10",
