@@ -2,15 +2,15 @@
 @parent can-stache-converters.converters
 @description A [can-stache.registerConverter converter] that is usually for binding to a `<input type="radio">` group, so that a scope value can be set the radio group’s selected value.
 
-@signature `equal(~compute, value)`
+@signature `equal(compute, value)`
 
 When the getter is called **compute**, a [can-compute.computed], is compared to **value** and if they are equal, returns true.
 
 When the setter is called, if the radio is now checked the **compute**'s setter is called with **value** as the value.
 
 ```handlebars
-<input type="radio" checked:bind="equal(~color, 'red')" /> Red
-<input type="radio" checked:bind="equal(~color, 'blue')" /> Blue
+<input type="radio" checked:bind="equal(color, 'red')" /> Red
+<input type="radio" checked:bind="equal(color, 'blue')" /> Blue
 ```
 
 In this example, the `color` scope value will be set to 'red' when the first radio is selected and 'blue' when the second radio is selected.
@@ -47,7 +47,7 @@ In this example we are using objects, to select a captain from one of three play
 
 ```handlebars
 {{#each players}}
-	<input type="radio" checked:bind="equal(~captain, this)" /> {{name}}
+	<input type="radio" checked:bind="equal(captain, this)" /> {{name}}
 {{/each}}
 ```
 

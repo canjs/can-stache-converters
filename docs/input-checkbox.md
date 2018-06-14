@@ -27,7 +27,7 @@ An alternative true and false value can be specified by using [can-stache-conver
 
 
 ```
-<input type="checkbox" checked:bind="either-or(~val, 'a', 'b')" />
+<input type="checkbox" checked:bind="either-or(val, 'a', 'b')" />
 ```
 
 In this case, the data passed in as `val` is a [can-compute] that contains either the value **a** or **b**. If the value of `val` is **a** then the checkbox will be checked. When the user checks/unchecks the checkbox then the value of `val` is set to be either **a** or **b** depending on whether it is checked.

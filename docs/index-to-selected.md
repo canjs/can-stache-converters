@@ -2,14 +2,14 @@
 @parent can-stache-converters.converters
 @description A [can-stache.registerConverter converter] that binds to a `<select>` value in order to two-way bind a selected item from a list to the selected item's index as a viewModel property.
 
-@signature `index-to-selected(~item, list)`
+@signature `index-to-selected(item, list)`
 
 When the getter is called, returns the index of the passed in item (which should be a [can-compute] from the provided list.
 
 When the setter is called, takes the selected index value and finds the item from the list with that index and passes that to set the compute’s value.
 
 ```handlebars
-<select value:bind="index-to-selected(~person, people)">
+<select value:bind="index-to-selected(person, people)">
 
 	{{#each people}}
 
