@@ -82,12 +82,14 @@ stache.addConverter("either-or", {
 
 		if (!matchA && !matchB) {
 			//!steal-remove-start
-			dev.warn(
-				"can-stache-converter.either-or:",
-				"`" + chosenVal + "`",
-				"does not match `" + aValue + "`",
-				"or `" + bValue + "`"
-			);
+			if (process.env.NODE_ENV !== 'production') {
+				dev.warn(
+					"can-stache-converter.either-or:",
+					"`" + chosenVal + "`",
+					"does not match `" + aValue + "`",
+					"or `" + bValue + "`"
+				);
+			}
 			//!steal-remove-end
 
 			return;
