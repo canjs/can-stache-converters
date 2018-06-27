@@ -1,3 +1,4 @@
+"use strict";
 var canReflect = require("can-reflect");
 var stache = require("can-stache");
 var stringToAny = require("can-util/js/string-to-any/string-to-any");
