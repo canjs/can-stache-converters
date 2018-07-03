@@ -3,7 +3,7 @@ var DefineList = require("can-define/list/list");
 var DefineMap = require("can-define/map/map");
 var domEvents = require("can-dom-events");
 var stache = require("can-stache");
-var each = require("can-util/js/each/each");
+var canReflect = require("can-reflect");
 
 var QUnit = require("steal-qunit");
 
@@ -30,7 +30,7 @@ QUnit.test("Works on all the types", function(){
 		return a === b;
 	};
 
-	each(types, function(expected, type){
+	canReflect.eachKey(types, function(expected, type){
 		var template = stache('<select value:bind="string-to-any(~val)"><option value="test">test</option><option value="' + type + '">' + type + '</option></select>');
 		var map = new DefineMap({
 			val: "test"
@@ -83,7 +83,7 @@ QUnit.test("Works on all the types without ~", function(){
 		return a === b;
 	};
 
-	each(types, function(expected, type){
+	canReflect.eachKey(types, function(expected, type){
 		var template = stache('<select value:bind="string-to-any(val)"><option value="test">test</option><option value="' + type + '">' + type + '</option></select>');
 		var map = new DefineMap({
 			val: "test"

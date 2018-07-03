@@ -3,7 +3,7 @@ var DefineList = require("can-define/list/list");
 var DefineMap = require("can-define/map/map");
 var domEvents = require("can-dom-events");
 var stache = require("can-stache");
-var each = require("can-util/js/each/each");
+var canReflect = require("can-reflect");
 
 var QUnit = require("steal-qunit");
 
