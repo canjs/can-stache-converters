@@ -42,7 +42,8 @@
     "can-reflect": "^1.11.1",
     "can-stache": "^4.8.0",
     "can-stache-bindings": "^4.0.2",
-    "can-util": "^3.10.18"
+    "can-log": "^1.0.0",
+    "can-string-to-any": "<2.0.0"
   },
   "devDependencies": {
     "can-compute": "^4.0.0",

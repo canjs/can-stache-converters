@@ -2,8 +2,8 @@ require("can-stache-converters");
 var DefineList = require("can-define/list/list");
 var DefineMap = require("can-define/map/map");
 var stache = require("can-stache");
-var each = require("can-util/js/each/each");
 var domEvents = require("can-dom-events");
+var canReflect = require("can-reflect");
 
 var QUnit = require("steal-qunit");
 

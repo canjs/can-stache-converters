@@ -1,9 +1,8 @@
 "use strict";
 var canReflect = require("can-reflect");
 var stache = require("can-stache");
-var stringToAny = require("can-util/js/string-to-any/string-to-any");
-var makeArray = require("can-util/js/make-array/make-array");
-var dev = require("can-util/js/dev/dev");
+var stringToAny = require("can-string-to-any");
+var dev = require("can-log/dev/dev");
 require("can-stache-bindings");
 
 stache.registerConverter("boolean-to-inList", {
@@ -103,7 +102,7 @@ var converters = {
 	},
 	"equal": {
 		get: function(){
-			var args = makeArray(arguments);
+			var args = canReflect.toArray(arguments);
 			// We don't need the helperOptions
 			args.pop();
 			if (args.length > 1) {
@@ -116,7 +115,7 @@ var converters = {
 			}
 		},
 		set: function(){
-			var args = makeArray(arguments);
+			var args = canReflect.toArray(arguments);
 			// Ignore the helperOptions
 			args.pop();
 			if (args.length > 2) {
