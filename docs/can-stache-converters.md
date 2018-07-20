@@ -30,7 +30,7 @@ which is after `blur`.
 
 `checked:bind="key"` cross-binds the checked property to a true or false value.
 
-`checked:bind="boolean-to-inList(key, list)"` cross-binds the checked property to `key` being added to / removed from `list`.  The tilde (`~`) is important here because the compute it sets up acts as a channel between the element's property and the scope's property.
+`checked:bind="boolean-to-inList(key, list)"` cross-binds the checked property to `key` being added to / removed from `list`.
 
 `checked:bind="either-or(key, checkedval, uncheckedval)"` cross-binds the checked property to `key`, but uses the `checkedval`
 value to represent checked, and the `uncheckedval` value to represent unchecked.
