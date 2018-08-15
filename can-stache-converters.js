@@ -11,7 +11,7 @@ var shouldPop = false;
 stache("{{echo(args(1))}}")({
 	echo: function(){},
 	args: function(){
-		shouldPop = ( arguments.length > 1 )
+		shouldPop = ( arguments.length > 1 );
 	}
 });
 
