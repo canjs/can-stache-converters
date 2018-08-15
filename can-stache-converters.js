@@ -5,6 +5,16 @@ var stringToAny = require("can-string-to-any");
 var dev = require("can-log/dev/dev");
 require("can-stache-bindings");
 
+// feature detect if multiple arguments are going to be passed
+// to an nested function call
+var shouldPop = false;
+stache("{{echo(args(1))}}")({
+	echo: function(){},
+	args: function(){
+		shouldPop = ( arguments.length > 1 )
+	}
+});
+
 stache.registerConverter("boolean-to-inList", {
 	get: function(item, list){
 		if(!list) {
@@ -104,7 +114,9 @@ var converters = {
 		get: function(){
 			var args = canReflect.toArray(arguments);
 			// We don't need the helperOptions
-			args.pop();
+			if(shouldPop) {
+				args.pop();
+			}
 			if (args.length > 1) {
 				var comparer = canReflect.getValue( args.pop() );
 
@@ -117,7 +129,9 @@ var converters = {
 		set: function(){
 			var args = canReflect.toArray(arguments);
 			// Ignore the helperOptions
-			args.pop();
+			if(shouldPop) {
+				args.pop();
+			}
 			if (args.length > 2) {
 				var b = args.shift();
 				var comparer = args.pop();
