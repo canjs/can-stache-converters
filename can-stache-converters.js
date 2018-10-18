@@ -134,7 +134,7 @@ var converters = {
 			}
 			if (args.length > 2) {
 				var b = args.shift();
-				var comparer = args.pop();
+				var comparer = canReflect.getValue( args.pop() );
 				if(b) {
 					for(var i = 0; i < args.length; i++) {
 						canReflect.setValue(args[i], comparer);
