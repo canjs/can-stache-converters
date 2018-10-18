@@ -2,6 +2,8 @@ require("can-stache-converters");
 var compute = require("can-compute");
 var domEvents = require("can-dom-events");
 var stache = require("can-stache");
+var DefineList = require("can-define/list/list");
+var DefineMap = require("can-define/map/map");
 
 var QUnit = require("steal-qunit");
 
@@ -126,4 +128,21 @@ QUnit.test("Allow multiple expressions to be passed in without ~", function() {
 
 	QUnit.equal(foo(), true, 'computed foo value is true');
 	QUnit.equal(bar(), true, 'computed bar value is true');
+});
+
+QUnit.test("Allow non static values", function() {
+	var template = stache('{{# each(foo) }}<input type="radio" checked:bind="equal(., ../bar.value)" />{{/ each}}');
+	var foo = new DefineList([ 'foobar' ]);
+	var bar = new DefineMap({value: 'zed'});
+
+	var input = template({
+		foo: foo,
+		bar: bar
+	}).querySelector('input');
+
+	QUnit.equal(input.checked, false, 'initially unchecked');
+
+	bar.value = 'foobar';
+
+	QUnit.equal(input.checked, true, 'now checked');
 });
