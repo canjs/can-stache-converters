@@ -4,6 +4,7 @@ var stache = require("can-stache");
 var stringToAny = require("can-string-to-any");
 var dev = require("can-log/dev/dev");
 require("can-stache-bindings");
+var stacheHelpers = require("can-stache-helpers");
 
 // feature detect if multiple arguments are going to be passed
 // to an nested function call
@@ -46,14 +47,6 @@ var converters = {
 		set: function(newVal, obs){
 			var converted = stringToAny(newVal);
 			canReflect.setValue(obs, converted);
-		}
-	},
-	"not": {
-		get: function(obs){
-			return !canReflect.getValue(obs);
-		},
-		set: function(newVal, obs){
-			canReflect.setValue(obs, !newVal);
 		}
 	},
 	"index-to-selected": {
@@ -147,5 +140,16 @@ var converters = {
 
 // Register itself right away
 stache.addConverter(converters);
+
+if(!stacheHelpers.not) {
+	stache.addConverter("not",{
+		get: function(obs){
+			return !canReflect.getValue(obs);
+		},
+		set: function(newVal, obs){
+			canReflect.setValue(obs, !newVal);
+		}
+	});
+}
 
 module.exports = converters;
