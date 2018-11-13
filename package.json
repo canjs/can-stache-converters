@@ -40,7 +40,7 @@
   "dependencies": {
     "can-dom-events": "^1.1.1",
     "can-log": "^1.0.0",
-    "can-reflect": "^1.11.1",
+    "can-reflect": "^1.17.7",
     "can-stache": "^4.8.0",
     "can-stache-bindings": "^4.0.2",
     "can-stache-helpers": "^1.2.0",
