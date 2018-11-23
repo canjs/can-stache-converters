@@ -4,22 +4,35 @@
 
 @signature `either-or(chosen, a, b)`
 
-When the getter is called, gets the value of the **chosen** compute and if it is equal to **a**, returns true, otherwise it returns false.
+  When the getter is called, gets the value of the **chosen** compute and if it is equal to **a**, returns true, otherwise it returns false.
 
-When the setter is called, if the new value is truthy, sets the **chosen** [can-compute] to **a**’s value, otherwise sets it to **b**’s value.
+  When the setter is called, if the new value is truthy, sets the **chosen** [can-compute] to **a**’s value, otherwise sets it to **b**’s value.
 
-```handlebars
-<span>Favorite superhero:</span>
-<input type="checkbox" checked:bind="either-or(chosen, 'Batman', 'Superman')"> Batman?
-```
+  ```html
+  <my-app></my-app>
+  <script type="module">
+  import {Component, stacheConverters} from "can/everything";
+  Component.extend({
+    tag: "my-app",
+    view: `
+      <div>Favorite superhero: {{chosen}}</div>
+      <input type="checkbox" checked:bind="either-or(chosen, 'Batman', 'Superman')" /> Batman?
+    `,
+    ViewModel: {
+      chosen: {default: "Superman"}
+    }
+  });
+  </script>
+  ```
+  @codepen
 
-@param {can-compute} chosen A compute where the chosen value (between `a` and `b` is stored). When the setter is called, this compute’s value will be updated.
+  @param {can-compute} chosen A compute where the chosen value (between `a` and `b` is stored). When the setter is called, this compute’s value will be updated.
 
-@param {*} a The `true` value. If the checkbox is checked, then **a**’s value will be stored in the **chosen** compute.
+  @param {*} a The `true` value. If the checkbox is checked, then **a**’s value will be stored in the **chosen** compute.
 
-@param {*} b The `false` value. If the checkbox is unchecked, then **b**’s value will be stored in the **chosen** compute.
+  @param {*} b The `false` value. If the checkbox is unchecked, then **b**’s value will be stored in the **chosen** compute.
 
-@return {can-compute} A compute that will be used by [can-stache-bindings] as a getter/setter bound to the element or a component's viewModel.
+  @return {can-compute} A compute that will be used by [can-stache-bindings] as a getter/setter bound to the element or a component's viewModel.
 
 @body
 
@@ -29,33 +42,26 @@ When the setter is called, if the new value is truthy, sets the **chosen** [can-
 
 You pass 3 arguments to this [can-stache.registerConverter converter]. The first argument is a compute that represents the chosen value. The second argument is the default, truthy, value. And the third argument is the falsey value.
 
-
-```handlebars
-<p>
-	<input type="checkbox"
-		checked:bind="either-or(pref, 'Star Trek', 'Star Wars')" />
-	<span>Star Trek</span>
-</p>
+```html
+<script type="stache/text" id="star-fan">
+<input type="checkbox"
+  checked:bind="either-or(pref, 'Star Trek', 'Star Wars')" />
+<span>Star Trek</span>
 
 <p>Your fandom: {{pref}}</p>
-```
+</script>
+<script type="module">
+import {DefineMap, stache, stacheConverters} from "can/everything";
 
-```js
-const template = stache.from( "demo-template" );
+const template = stache.from( "star-fan" );
 
 const fan = new DefineMap( {
-	pref: "Star Trek"
+  pref: "Star Trek"
 } );
 
 document.body.appendChild( template( fan ) );
 
-// User unchecks the checkbox
-fan.pref === "Star Wars";
-
-// Changing the value in code:
-fan.pref === "Star Trek";
-
-// Checkbox is now checked again.
+fan.pref = "Star Wars";
+</script>
 ```
-
-@demo demos/can-stache-converters/input-checkbox-binary.html
+@codepen

@@ -1,11 +1,40 @@
 @module can-stache-converters
 @parent can-views
 @collection can-ecosystem
+@description Provides a set of [can-stache.addConverter converters] useful for two-way binding with form elements such as `<input>` and `<select>`.
 @group can-stache-converters.examples Examples
 @group can-stache-converters.converters Converters
 @package ../package.json
+@outline 2
 
-Provides a set of [can-stache.registerConverter converters] useful for two-way binding with form elements such as `<input>` and `<select>`.
+@signature `Object`
+
+  The can-stache-converters exports an object with the following converters which are useful for two-way binding with form elements. It also adds in the following can-stache converters:
+
+  ```js
+  {
+    "boolean-to-inList"(item, list),
+    // binds a boolean attribute to if an item is in a list.
+
+    "either-or"(chosen, a, b),
+    // binds to a checkbox two values provided as arguments.
+
+    "equal"(compute, value),
+    // binds to a value returning true if compute is equal to value.
+  
+    "index-to-selected"(item, list),
+    // binds to a value to two-way bind a selected item from a list to the selected item's index.
+
+    "not"(value),
+    // binds the negation of a value.
+
+    "selected-to-index"(index, list),
+    // binds an index in a list to the selected item's value as a viewModel property.
+
+    "string-to-any"(item),
+    // binds a value to a primitive value, two-way converted back to that primitive value.
+  }
+  ```
 
 @body
 
