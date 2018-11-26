@@ -8,7 +8,7 @@ When the getter is called, gets the value of the compute and calls `.toString()`
 
 When the setter is called, takes the new value and converts it to the primitive value using [can-util/js/string-to-any/string-to-any] and sets the compute using that converted value.
 
-```handlebars
+```html
 <select value:bind="string-to-any(favePlayer)">
   <option value="23">Michael Jordan</option>
 	<option value="32">Magic Johnson</option>
@@ -24,7 +24,7 @@ When the setter is called, takes the new value and converts it to the primitive 
 
 This is usually used with `<select>`s where you would like to two-way bind a string to a primitive value.
 
-```handlebars
+```html
 <select value:bind="string-to-any(someValue)">
   <option value="2">Number</option>
   <option value="null">Null</option>

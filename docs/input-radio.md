@@ -9,7 +9,7 @@ Cross bind a value to a radio input.
 
 To bind to a radio input, if you have a set of boolean values you can bind to the input’s `checked` property as you do with [can-stache-converters.examples.input-checkbox].
 
-```handlebars
+```html
 <input type="radio" checked:bind="one" /> One
 <input type="radio" checked:bind="two" /> Two
 ```

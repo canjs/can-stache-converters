@@ -8,7 +8,7 @@ When the getter is called, returns the index of the passed in item (which should
 
 When the setter is called, takes the selected index value and finds the item from the list with that index and passes that to set the compute’s value.
 
-```handlebars
+```html
 <select value:bind="index-to-selected(person, people)">
 
 	{{#each people}}

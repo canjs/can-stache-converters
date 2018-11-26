@@ -8,7 +8,7 @@ When the getter is called **compute**, a [can-compute.computed], is compared to 
 
 When the setter is called, if the radio is now checked the **compute**'s setter is called with **value** as the value.
 
-```handlebars
+```html
 <input type="radio" checked:bind="equal(color, 'red')" /> Red
 <input type="radio" checked:bind="equal(color, 'blue')" /> Blue
 ```
@@ -26,7 +26,7 @@ When the getter is called the two values will be compared and if they are equal,
 
 In this example there is only a one-way binding, parent to child, so there is no setter case.
 
-```handlebars
+```html
 <my-modal show:from="equal(showModal, true)" />
 ```
 
@@ -45,7 +45,7 @@ This [can-stache-converters converter] will most often be used in conjunction wi
 
 In this example we are using objects, to select a captain from one of three players:
 
-```handlebars
+```html
 {{#each players}}
 	<input type="radio" checked:bind="equal(captain, this)" /> {{name}}
 {{/each}}

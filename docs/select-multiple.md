@@ -28,21 +28,25 @@ in sync with the selected items of the `<select>` element.
 
 For example, the following template:
 
-    <select multiple values:bind="colors">
-      <option value='red'>Red</option>
-      <option value='green'>Green</option>
-      <option value='yellow'>Yellow</option>
-    </select>
+```html
+<select multiple values:bind="colors">
+  <option value='red'>Red</option>
+  <option value='green'>Green</option>
+  <option value='yellow'>Yellow</option>
+</select>
+```
 
 Could be rendered with one of the following:
 
-    // A can-map property
-    new DefineMap({colors: []})
+```js
+// A can-map property
+new DefineMap({colors: []})
 
-    // A compute
-    { colors: compute([]) }
+// A compute
+{ colors: compute([]) }
 
-    // A DefineList
-    { colors: new DefineList() }
+// A DefineList
+{ colors: new DefineList() }
+```
     
 @demo demos/can-stache-converters/multi-values.html
