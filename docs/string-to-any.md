@@ -4,19 +4,19 @@
 
 @signature `string-to-any(item)`
 
-When the getter is called, gets the value of the compute and calls `.toString()` on that value.
+  When the getter is called, gets the value of the compute and calls `.toString()` on that value.
 
-When the setter is called, takes the new value and converts it to the primitive value using [can-util/js/string-to-any/string-to-any] and sets the compute using that converted value.
+  When the setter is called, takes the new value and converts it to the primitive value using [can-util/js/string-to-any/string-to-any] and sets the compute using that converted value.
 
-```html
-<select value:bind="string-to-any(favePlayer)">
-  <option value="23">Michael Jordan</option>
-	<option value="32">Magic Johnson</option>
-</select>
-```
+  ```html
+  <select value:bind="string-to-any(favePlayer)">
+    <option value="23">Michael Jordan</option>
+    <option value="32">Magic Johnson</option>
+  </select>
+  ```
 
-@param {can-compute} item A compute holding a primitive value.
-@return {can-compute} A compute that will be used by [can-stache-bindings] as a getter/setter when the element’s value changes.
+  @param {can-compute} item A compute holding a primitive value.
+  @return {can-compute} A compute that will be used by [can-stache-bindings] as a getter/setter when the element’s value changes.
 
 @body
 
@@ -25,28 +25,38 @@ When the setter is called, takes the new value and converts it to the primitive 
 This is usually used with `<select>`s where you would like to two-way bind a string to a primitive value.
 
 ```html
-<select value:bind="string-to-any(someValue)">
-  <option value="2">Number</option>
-  <option value="null">Null</option>
-  <option value="foo">String</option>
-  <option value="true">Boolean</option>
-  <option value="NaN">NaN</option>
-  <option value="Infinity">Infinity</option>
-</select>
+<select-type></select-type>
+<script type="module">
+import {Component, stacheConverters} from "can/everything";
+
+Component.extend({
+  tag: "select-type",
+  view: `
+    <select value:bind="string-to-any( someValue )">
+      <option value="2">Number</option>
+      <option value="null">Null</option>
+      <option value="foo">String</option>
+      <option value="true">Boolean</option>
+      <option value="NaN">NaN</option>
+      <option value="Infinity">Infinity</option>
+    </select>
+    <p>someValue is Boolean: {{isBoolean}}</p>
+  `,
+  ViewModel: {
+    someValue: {
+      default: "foo"
+    },
+    isBoolean: {
+      value(prop) {
+        // Click the select box and choose Boolean
+        prop.listenTo( "someValue", (value) => {
+          prop.resolve( typeof value === "boolean" );
+        } );
+        prop.resolve( typeof this.someValue === "boolean" );
+      }
+    }
+  }
+});
+</script>
 ```
-
-```js
-const str = document.getElementById( "select-template" ).innerHTML;
-const template = stache( str );
-
-const map = new DefineMap( {
-	someValue: "foo"
-} );
-
-document.body.appendChild( template( map ) );
-
-map.item = NaN; // select.value becomes "NaN"
-
-// Click the select box and choose Boolean
-map.item === true; // -> true
-```
+@codepen
