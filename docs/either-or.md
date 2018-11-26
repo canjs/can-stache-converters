@@ -1,6 +1,6 @@
 @function can-stache-converters.either-or either-or
 @parent can-stache-converters.converters
-@description A [can-stache.registerConverter converter] that two-way binds to a checkbox two values provided as arguments. This converter is useful when you have a binary decision between two fixed values.
+@description A [can-stache.addConverter converter] that two-way binds to a checkbox two values provided as arguments. This converter is useful when you have a binary decision between two fixed values.
 
 @signature `either-or(chosen, a, b)`
 
@@ -40,7 +40,7 @@
 
 **either-or** is made to be used with `<input type=checkbox>` elements when there is a binary decision that can be made (so that multiple radio buttons are not needed).
 
-You pass 3 arguments to this [can-stache.registerConverter converter]. The first argument is a compute that represents the chosen value. The second argument is the default, truthy, value. And the third argument is the falsey value.
+You pass 3 arguments to this [can-stache.addConverter converter]. The first argument is a compute that represents the chosen value. The second argument is the default, truthy, value. And the third argument is the falsey value.
 
 ```html
 <script type="stache/text" id="star-fan">

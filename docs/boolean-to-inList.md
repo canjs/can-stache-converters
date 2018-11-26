@@ -1,6 +1,6 @@
 @function can-stache-converters.boolean-to-inList boolean-to-inList
 @parent can-stache-converters.converters
-@description A [can-stache.registerConverter converter] that binds a boolean attribute, such as an `<input>` value, to whether or not an item is in a list.
+@description A [can-stache.addConverter converter] that binds a boolean attribute, such as an `<input>` value, to whether or not an item is in a list.
 
 @signature `boolean-to-inList(item, list)`
 

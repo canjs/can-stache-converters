@@ -1,6 +1,6 @@
 @function can-stache-converters.equal equal
 @parent can-stache-converters.converters
-@description A [can-stache.registerConverter converter] that is usually for binding to a `<input type="radio">` group, so that a scope value can be set the radio group’s selected value.
+@description A [can-stache.addConverter converter] that is usually for binding to a `<input type="radio">` group, so that a scope value can be set the radio group’s selected value.
 
 @signature `equal(compute, value)`
 

@@ -28,6 +28,6 @@ document.body.appendChild( template( map ) );
 
 More often than binding to boolean values of each radio's `checked` value, you will want to know what the `value` is of the radio group. Since each radio has its own `value`, the radio's selected value is the value of the radio item that is selected.
 
-Using the [can-stache-converters.equal] [can-stache.registerConverter converter] you can bind a value within your scope to the radio group’s selected value:
+Using the [can-stache-converters.equal] [can-stache.addConverter converter] you can bind a value within your scope to the radio group’s selected value:
 
 @demo demos/can-stache-converters/input-radio.html

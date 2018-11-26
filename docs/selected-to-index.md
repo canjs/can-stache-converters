@@ -1,6 +1,6 @@
 @function can-stache-converters.selected-to-index selected-to-index
 @parent can-stache-converters.converters
-@description A [can-stache.registerConverter converter] that binds an index in a list to the selected item's value as a viewModel property.
+@description A [can-stache.addConverter converter] that binds an index in a list to the selected item's value as a viewModel property.
 
 @signature `selected-to-index(index, list)`
 
