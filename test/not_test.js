@@ -8,7 +8,7 @@ var QUnit = require("steal-qunit");
 
 QUnit.module("not");
 
-QUnit.test("saves the inverse of the selected value without ~ (#68)", function(){
+QUnit.test("saves the inverse of the selected value without ~ (#68)", function(assert) {
 	var template = stache('<input type="checkbox" checked:bind="not(val)" />');
 	var map = new DefineMap({
 		val: true
@@ -16,20 +16,20 @@ QUnit.test("saves the inverse of the selected value without ~ (#68)", function()
 
 	var input = template(map).firstChild;
 
-	QUnit.equal(input.checked, false, "initially false");
+	assert.equal(input.checked, false, "initially false");
 
 	map.val = false;
 
-	QUnit.equal(input.checked, true, "true because map val is false");
+	assert.equal(input.checked, true, "true because map val is false");
 
 	input.checked = false;
 	domEvents.dispatch(input, "change");
 
-	QUnit.equal(map.val, true, "map is now true because checkbox is false");
+	assert.equal(map.val, true, "map is now true because checkbox is false");
 });
 
 
-QUnit.test("saves the inverse of the selected value", function(){
+QUnit.test("saves the inverse of the selected value", function(assert) {
 	var template = stache('<input type="checkbox" checked:bind="not(~val)" />');
 	var map = new DefineMap({
 		val: true
@@ -37,19 +37,19 @@ QUnit.test("saves the inverse of the selected value", function(){
 
 	var input = template(map).firstChild;
 
-	QUnit.equal(input.checked, false, "initially false");
+	assert.equal(input.checked, false, "initially false");
 
 	map.val = false;
 
-	QUnit.equal(input.checked, true, "true because map val is false");
+	assert.equal(input.checked, true, "true because map val is false");
 
 	input.checked = false;
 	domEvents.dispatch(input, "change");
 
-	QUnit.equal(map.val, true, "map is now true because checkbox is false");
+	assert.equal(map.val, true, "map is now true because checkbox is false");
 });
 
-QUnit.test("works with boolean-to-inList", function(){
+QUnit.test("works with boolean-to-inList", function(assert) {
 	var template = stache("<input type='checkbox' checked:bind='not(~boolean-to-inList(item, list))' />");
 	var map = new DefineMap({
 		item: 2,
@@ -58,18 +58,18 @@ QUnit.test("works with boolean-to-inList", function(){
 
 	var input = template(map).firstChild;
 
-	QUnit.equal(input.checked, false, "not checked because it is in the list");
+	assert.equal(input.checked, false, "not checked because it is in the list");
 
 	map.item = 4;
 
-	QUnit.equal(input.checked, true, "checked because not in the list");
+	assert.equal(input.checked, true, "checked because not in the list");
 
 	input.checked = false;
 	domEvents.dispatch(input, "change");
 
-	QUnit.equal(map.list.indexOf(4), 3, "it was pushed into the list");
+	assert.equal(map.list.indexOf(4), 3, "it was pushed into the list");
 
 	// Remove it from the list
 	map.list.splice(3, 1);
-	QUnit.equal(input.checked, true, "now it's checked because not in the list");
+	assert.equal(input.checked, true, "now it's checked because not in the list");
 });

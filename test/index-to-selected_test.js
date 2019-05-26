@@ -9,7 +9,7 @@ var QUnit = require("steal-qunit");
 
 QUnit.module("index-to-selected");
 
-QUnit.test("chooses select option by the index from a list", function(){
+QUnit.test("chooses select option by the index from a list", function(assert) {
 	var template = stache('<select value:bind="index-to-selected(~person, people)"><option value="none"></option>{{#each people}}<option value="{{scope.index}}">{{name}}</option>{{/each}}</select>');
 
 	var map = new DefineMap({
@@ -24,27 +24,27 @@ QUnit.test("chooses select option by the index from a list", function(){
 	var select = template(map).firstChild;
 
 	// Initial value
-	QUnit.equal(select.value, 1, "initially set to the first value");
+	assert.equal(select.value, 1, "initially set to the first value");
 
 	// Select a different thing.
 	select.value = 2;
 	domEvents.dispatch(select, "change");
 
-	QUnit.equal(map.person, "Wilbur", "now it is me");
+	assert.equal(map.person, "Wilbur", "now it is me");
 
 	// Change the selected the other way.
 	map.person = map.people.item(0);
 
-	QUnit.equal(select.value, 0, "set back");
+	assert.equal(select.value, 0, "set back");
 
 	// Can be set to other stuff too
 	select.value = "none";
 	domEvents.dispatch(select, "change");
 
-	QUnit.equal(map.person, undefined, "now undefined because not in the list");
+	assert.equal(map.person, undefined, "now undefined because not in the list");
 });
 
-QUnit.test("chooses select option by the index from a list without ~", function(){
+QUnit.test("chooses select option by the index from a list without ~", function(assert) {
 	var template = stache('<select value:bind="index-to-selected(person, people)"><option value="none"></option>{{#each people}}<option value="{{scope.index}}">{{name}}</option>{{/each}}</select>');
 
 	var map = new DefineMap({
@@ -59,22 +59,22 @@ QUnit.test("chooses select option by the index from a list without ~", function(
 	var select = template(map).firstChild;
 
 	// Initial value
-	QUnit.equal(select.value, 1, "initially set to the first value");
+	assert.equal(select.value, 1, "initially set to the first value");
 
 	// Select a different thing.
 	select.value = 2;
 	domEvents.dispatch(select, "change");
 
-	QUnit.equal(map.person, "Wilbur", "now it is me");
+	assert.equal(map.person, "Wilbur", "now it is me");
 
 	// Change the selected the other way.
 	map.person = map.people.item(0);
 
-	QUnit.equal(select.value, 0, "set back");
+	assert.equal(select.value, 0, "set back");
 
 	// Can be set to other stuff too
 	select.value = "none";
 	domEvents.dispatch(select, "change");
 
-	QUnit.equal(map.person, undefined, "now undefined because not in the list");
+	assert.equal(map.person, undefined, "now undefined because not in the list");
 });

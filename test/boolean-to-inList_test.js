@@ -8,12 +8,12 @@ var canReflect = require("can-reflect");
 var QUnit = require("steal-qunit");
 
 QUnit.module("boolean-to-inList", {
-	setup: function(){
+	beforeEach: function(assert) {
 		this.fixture = document.getElementById('qunit-fixture');
 	}
 });
 
-QUnit.test("Works with checkboxes", function(){
+QUnit.test("Works with checkboxes", function(assert) {
 	var template = stache("<input type='checkbox' checked:bind='boolean-to-inList(item, list)' />");
 	var map = new DefineMap({
 		item: 2,
@@ -23,32 +23,32 @@ QUnit.test("Works with checkboxes", function(){
 	var frag = template(map);
 	var input = frag.firstChild;
 
-	QUnit.ok(input.checked, "it is initially checked");
-	QUnit.equal(map.list.indexOf(2), 1, "two is in the list");
+	assert.ok(input.checked, "it is initially checked");
+	assert.equal(map.list.indexOf(2), 1, "two is in the list");
 
 	input.checked = false;
 	domEvents.dispatch(input, "change");
 
-	QUnit.equal(map.list.indexOf(2), -1, "No longer in the list");
+	assert.equal(map.list.indexOf(2), -1, "No longer in the list");
 
 	map.item = 3;
-	QUnit.ok(input.checked, "3 is in the list");
+	assert.ok(input.checked, "3 is in the list");
 
 	// Add something to the list
 	map.item = 5;
-	QUnit.ok(!input.checked, "5 is not in the list");
+	assert.ok(!input.checked, "5 is not in the list");
 
 	map.list.push(5);
-	QUnit.ok(input.checked, "Now 5 is in the list");
+	assert.ok(input.checked, "Now 5 is in the list");
 
 	map.item = 6;
 	input.checked = true;
 	domEvents.dispatch(input, "change");
 
-	QUnit.equal(map.list.indexOf(6), 3, "pushed into the list");
+	assert.equal(map.list.indexOf(6), 3, "pushed into the list");
 });
 
-QUnit.test("If there is no list, treated as false", function(){
+QUnit.test("If there is no list, treated as false", function(assert) {
 	var template = stache("<input type='checkbox' checked:bind='boolean-to-inList(item, list)' />");
 	var map = new DefineMap({
 		item: 2,
@@ -57,15 +57,15 @@ QUnit.test("If there is no list, treated as false", function(){
 	var frag = template(map);
 	var input = frag.firstChild;
 
-	QUnit.ok(!input.checked, "not checked because there is no list");
+	assert.ok(!input.checked, "not checked because there is no list");
 
 	input.checked = true;
 	domEvents.dispatch(input, "change");
 
-	QUnit.ok(true, "no errors thrown");
+	assert.ok(true, "no errors thrown");
 });
 
-QUnit.test("works with radio buttons", function(){
+QUnit.test("works with radio buttons", function(assert) {
 	var template = stache("<form><input type='radio' name='name' value='Matthew' checked:bind='boolean-to-inList(\"Matthew\", names)' /><input type='radio' name='name' value='Wilbur' checked:bind='boolean-to-inList(\"Wilbur\", names)' /></form>");
 	var map = new DefineMap({
 		names: ['Wilbur']
@@ -78,12 +78,12 @@ QUnit.test("works with radio buttons", function(){
 	this.fixture.appendChild(frag);
 
 	// Initial state
-	QUnit.equal(radioOne.checked, false, "Matthew not checked");
-	QUnit.equal(radioTwo.checked, true, "Wilbur is checked");
+	assert.equal(radioOne.checked, false, "Matthew not checked");
+	assert.equal(radioTwo.checked, true, "Wilbur is checked");
 
 	radioOne.checked = true;
 	domEvents.dispatch(radioOne, "change");
 
-	QUnit.equal(radioOne.checked, true, "Matthew is checked");
-	QUnit.equal(radioTwo.checked, false, "Wilbur is not checked");
+	assert.equal(radioOne.checked, true, "Matthew is checked");
+	assert.equal(radioTwo.checked, false, "Wilbur is not checked");
 });

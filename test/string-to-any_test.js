@@ -9,7 +9,7 @@ var QUnit = require("steal-qunit");
 
 QUnit.module("string-to-any");
 
-QUnit.test("Works on all the types", function(){
+QUnit.test("Works on all the types", function(assert) {
 	var types = {
 		"22.3": 22.3,
 		"foo": "foo",
@@ -50,19 +50,19 @@ QUnit.test("Works on all the types", function(){
 		select.value = type;
 		domEvents.dispatch(select, "change");
 
-		QUnit.ok(equality(map.val, expected), "map's value updated to: " + type);
+		assert.ok(equality(map.val, expected), "map's value updated to: " + type);
 
 		// Now go the other way.
 		map.val = "test";
 		map.val = expected;
 
-		QUnit.equal(select.value, type, "select's value updated to: " + type);
+		assert.equal(select.value, type, "select's value updated to: " + type);
 	});
 
 
 });
 
-QUnit.test("Works on all the types without ~", function(){
+QUnit.test("Works on all the types without ~", function(assert) {
 	var types = {
 		"22.3": 22.3,
 		"foo": "foo",
@@ -103,13 +103,13 @@ QUnit.test("Works on all the types without ~", function(){
 		select.value = type;
 		domEvents.dispatch(select, "change");
 
-		QUnit.ok(equality(map.val, expected), "map's value updated to: " + type);
+		assert.ok(equality(map.val, expected), "map's value updated to: " + type);
 
 		// Now go the other way.
 		map.val = "test";
 		map.val = expected;
 
-		QUnit.equal(select.value, type, "select's value updated to: " + type);
+		assert.equal(select.value, type, "select's value updated to: " + type);
 	});
 
 

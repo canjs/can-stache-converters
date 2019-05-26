@@ -7,7 +7,7 @@ var QUnit = require("steal-qunit");
 
 QUnit.module("selected-to-index");
 
-QUnit.test("sets index by the value from a list", function(){
+QUnit.test("sets index by the value from a list", function(assert) {
 	var template = stache('<input value:bind="selected-to-index(~index, people)" />');
 
 	var map = new DefineMap({
@@ -22,28 +22,28 @@ QUnit.test("sets index by the value from a list", function(){
 	var input = template(map).firstChild;
 
 	// Initial value
-	QUnit.equal(input.value, "Anne", "initially set to the first value");
+	assert.equal(input.value, "Anne", "initially set to the first value");
 
 	// Select a different thing.
 	input.value = "Wilbur";
 	domEvents.dispatch(input, "change");
 
-	QUnit.equal(map.index, "2", "now it is me");
+	assert.equal(map.index, "2", "now it is me");
 
 	// Change the selected the other way.
 	map.index = "0";
 
-	QUnit.equal(input.value, "Matthew", "set back");
+	assert.equal(input.value, "Matthew", "set back");
 
 	// Can be set to other stuff too
 	input.value = "none";
 	domEvents.dispatch(input, "change");
 
-	QUnit.equal(map.index, -1, "now -1 because not in the list");
+	assert.equal(map.index, -1, "now -1 because not in the list");
 });
 
 
-QUnit.test("sets index by the value from a list without ~", function(){
+QUnit.test("sets index by the value from a list without ~", function(assert) {
 	var template = stache('<input value:bind="selected-to-index(index, people)" />');
 
 	var map = new DefineMap({
@@ -58,22 +58,22 @@ QUnit.test("sets index by the value from a list without ~", function(){
 	var input = template(map).firstChild;
 
 	// Initial value
-	QUnit.equal(input.value, "Anne", "initially set to the first value");
+	assert.equal(input.value, "Anne", "initially set to the first value");
 
 	// Select a different thing.
 	input.value = "Wilbur";
 	domEvents.dispatch(input, "change");
 
-	QUnit.equal(map.index, "2", "now it is me");
+	assert.equal(map.index, "2", "now it is me");
 
 	// Change the selected the other way.
 	map.index = "0";
 
-	QUnit.equal(input.value, "Matthew", "set back");
+	assert.equal(input.value, "Matthew", "set back");
 
 	// Can be set to other stuff too
 	input.value = "none";
 	domEvents.dispatch(input, "change");
 
-	QUnit.equal(map.index, -1, "now -1 because not in the list");
+	assert.equal(map.index, -1, "now -1 because not in the list");
 });
