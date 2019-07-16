@@ -3,8 +3,11 @@ var canReflect = require("can-reflect");
 var stache = require("can-stache");
 var stringToAny = require("can-string-to-any");
 var dev = require("can-log/dev/dev");
-require("can-stache-bindings");
+var stacheBindings = require("can-stache-bindings");
 var stacheHelpers = require("can-stache-helpers");
+
+
+stache.addBindings(stacheBindings);
 
 // feature detect if multiple arguments are going to be passed
 // to an nested function call
