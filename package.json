@@ -42,7 +42,7 @@
     "can-log": "^1.0.0",
     "can-reflect": "^1.11.1",
     "can-stache": "^5.0.0",
-    "can-stache-bindings": "^5.0.0",
+    "can-stache-bindings": "^5.0.1",
     "can-stache-helpers": "^1.2.0",
     "can-string-to-any": "<2.0.0"
   },
