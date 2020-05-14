@@ -50,7 +50,7 @@
     "can-compute": "^4.0.0",
     "can-define": "^2.0.0",
     "detect-cyclic-packages": "^1.1.0",
-    "jshint": "^2.9.1",
+    "jshint": "^2.11.1",
     "steal": "^1.2.10",
     "steal-qunit": "^2.0.0",
     "steal-tools": "^1.1.2",
